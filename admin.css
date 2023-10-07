@@ -1,0 +1,832 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif !important;
+    overflow-y: scroll;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    /* Độ rộng của thanh cuộn */
+}
+
+::-webkit-scrollbar-track {
+    background-color: white;
+    /* Màu nền của thanh cuộn */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #555;
+    /* Màu thanh cuộn */
+    /* border-radius: 5px; Bo góc cho thanh cuộn */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: black;
+    /* Màu thanh cuộn khi di chuột qua */
+}
+
+
+.header {
+    width: 100%;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%);
+    background-color: #202020;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.header .inner-warp {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    height: 60px;
+}
+
+.header .inner-warp img {
+    width: 160px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.inner-search {
+    margin-left: 40px;
+    /* position: relative; */
+
+}
+
+#product-list-search {
+    max-height: 300px;
+    /* Đặt kích thước cố định */
+    overflow-y: scroll;
+    /* Bật thanh trượt dọc */
+}
+
+
+.product-list-search {
+    position: absolute;
+    width: 625px;
+    max-height: 300px;
+    overflow-y: scroll;
+    height: auto;
+    background-color: #F5F5F5;
+    scrollbar-width: thin;
+    /* Đặt kích thước của thanh cuộn (thin, auto, etc.) */
+    scrollbar-color: #888 #ccc;
+    /* Đặt màu cho thanh cuộn (màu nền, màu thanh cuộn) */
+
+    /* Tạo hiệu ứng đẹp cho thanh cuộn trên trình duyệt Chrome và Safari */
+    &::-webkit-scrollbar {
+        width: 8px;
+        /* Đặt chiều rộng của thanh cuộn */
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #888;
+        /* Màu của thanh cuộn */
+        border-radius: 4px;
+        /* Độ cong của thanh cuộn */
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: #555;
+        /* Màu của thanh cuộn khi di chuột qua */
+    }
+}
+
+
+.product-list-search .product-1 {
+
+    width: calc(100%-5px);
+    background-color: white;
+    display: flex;
+    padding: 5px 5px;
+    border: 1px solid black;
+    margin: 5px;
+    justify-content: left;
+    align-items: center;
+    font-size: 16px;
+}
+
+.product-list-search .product-1 img {
+    width: 80px;
+    height: auto;
+}
+
+.product-list-search .product-1 div {
+    display: flex;
+}
+
+.product-list-search .product-1 p {
+    margin: 5px;
+    color: red;
+}
+
+.product-list-search .product-1 p s {
+    margin: 5px;
+    color: gray;
+}
+
+.input-place {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.input-place input {
+    height: 40px;
+    width: 625px;
+    /* position: relative; */
+    border-radius: 2px;
+}
+
+.input-place button {
+    height: 35px;
+    width: 70px;
+    position: absolute;
+    left: 550px;
+    background-color: #202020;
+    border-radius: 4px;
+}
+
+.input-place button i {
+    font-size: 20px;
+    color: aliceblue;
+}
+
+.inner-menu {
+    margin-left: 100px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+
+.inner-menu ul {
+    display: flex;
+    list-style-type: none;
+}
+
+.inner-menu ul li i {
+    margin-right: 80px;
+    width: 30px;
+    height: 30px;
+    font-size: 28px;
+    color: aliceblue;
+    cursor: pointer;
+}
+
+.inner-menu .user-menu-false {
+    display: none;
+    padding: 10px 10px;
+    right: -100px;
+    width: 400px;
+    height: 270px;
+    position: absolute;
+    background-color: white;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    border: 1px solid aliceblue;
+}
+
+
+.inner-menu .user-menu-register {
+    display: none;
+    padding: 10px 10px;
+    right: -100px;
+    width: 400px;
+    height: 370px;
+    position: absolute;
+    background-color: white;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    border: 1px solid aliceblue;
+}
+
+
+.inner-menu .user-menu-false .menu-content,
+.inner-menu .user-menu-register .menu-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner-menu .user-menu-false .menu-content .menu-title div,
+.inner-menu .user-menu-register .menu-content .menu-title div {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.inner-menu .user-menu-false .menu-content .menu-title p,
+.inner-menu .user-menu-register .menu-content .menu-title p {
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner-menu .user-menu-false .menu-content .menu-input,
+.inner-menu .user-menu-register .menu-content .menu-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.inner-menu .user-menu-false .menu-content .menu-input input,
+.inner-menu .user-menu-register .menu-content .menu-input input {
+    height: 40px;
+    margin-bottom: 10px;
+    width: 320px;
+    border: 1px solid #e5e5e5;
+}
+
+.inner-menu .user-menu-false .menu-content .menu-input button,
+.inner-menu .user-menu-register .menu-content .menu-input button {
+    width: 320px;
+    height: 35px;
+    color: white;
+    background-color: black;
+    cursor: pointer;
+}
+
+.inner-menu .user-menu-false .menu-content .menu-register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner-menu .user-menu-false .menu-content .menu-register h5 {
+    cursor: pointer;
+}
+
+
+.inner-menu .user-menu-true {
+    display: none;
+    /* padding: 10px 10px; */
+    right: 0px;
+    width: 200px;
+    height: auto;
+    position: absolute;
+    background-color: white;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    border: 1px solid aliceblue;
+    /* margin-left: auto;
+    margin-right: auto; */
+}
+
+.inner-menu .user-menu-true .menu-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner-menu .user-menu-true .menu-content .menu-input {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.inner-menu .user-menu-true .menu-content .menu-input button {
+    width: 200px;
+    margin-bottom: -1px;
+    height: 30px;
+    color: black;
+    background-color: white;
+    cursor: pointer;
+    font-size: 15px;
+    border: 1px solid #e5e5e5;
+}
+
+.inner-menu .user-menu-true .menu-content .menu-input button:hover {
+    color: white;
+    background-color: black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ----------------------------------------------------------------------- */
+
+.contaier-1 {
+    height: 40px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    /* max-width: 1200px; */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ---------------------------------------------------------------------------- */
+.inner-nav {
+    width: 100%;
+    height: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    padding: 12px;
+
+}
+
+.inner-nav a {
+    margin-right: 50px;
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+
+
+.footer {
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+    background-color: #202020;
+    color: white;
+    /* margin-left: auto;
+    margin-right: auto; */
+
+}
+
+.footer .ft-top {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    padding-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    border-bottom: 1px solid white;
+
+}
+
+.footer .ft-top .emailPromo {
+    margin-left: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.footer .ft-top .emailPromo input {
+    width: 300px;
+    height: 40px;
+    border: none;
+    font-size: 20px;
+}
+
+.footer .ft-top .emailPromo button {
+    color: white;
+    background-color: #0d0d0d;
+    border: none;
+    margin-left: -5px;
+    height: 44px;
+    font-size: 18px;
+}
+
+.footer .ft-top .emailPromo button:hover {
+    background-color: black;
+}
+
+.footer .ft-top .icon {
+    display: flex;
+    margin-left: 250px;
+    /* Di chuyển bắt đầu từ bên trái 300px */
+    border: none;
+    height: 45px;
+    justify-content: space-between;
+    /* Khoảng cách đều giữa các biểu tượng */
+    width: auto;
+}
+
+/* Điều chỉnh margin cho từng nút (button) trong phần icon */
+.footer .ft-top .icon button {
+    width: 40px;
+    margin-left: 30px;
+    background-color: white;
+    cursor: pointer;
+    font-size: 20px;
+    /* Đặt margin về 0 để không còn margin mặc định */
+}
+
+
+
+.product-price {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    /* height: 30%; */
+}
+
+.product-price p {
+    margin-left: 5px;
+    color: red;
+    font-size: 16px;
+}
+
+.product-price p s {
+    color: gray;
+    font-size: 14px;
+    margin-left: 0px;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* ------------------------------------------------------ */
+
+
+
+
+
+
+
+
+
+.section-1 {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.section-1 .inner-warp {
+
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    /* padding: 10px 10px; */
+}
+
+.section-1 .inner-warp .menu-select {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: auto;
+    background-color: white;
+    padding: 10px 10px;
+}
+
+.section-1 .inner-warp .menu-select .menu-title {
+
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+
+}
+
+
+.section-1 .inner-warp .menu-select .menu-btn ul {
+    list-style-type: none;
+    padding: 0px;
+}
+
+.section-1 .inner-warp .menu-select .menu-btn ul li button {
+    margin: 5px 0px;
+    border: none;
+    background-color: white;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+}
+
+.section-1 .inner-warp .menu-select .menu-btn ul li button:hover,
+.section-1 .inner-warp .menu-select .menu-btn ul li button.active{
+    background-color: #888;
+}
+
+
+
+
+
+
+.section-1 .inner-warp .menu-content {
+    width: 80%;
+    background-color: white;
+    margin-left: 10px;
+}
+
+.section-1 .inner-warp .menu-content .menu-content-title {
+    margin-left: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+
+.section-1 .inner-warp .menu-content .product-content .product-btn ul {
+    list-style-type: none;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.section-1 .inner-warp .menu-content .product-content .product-btn ul li button {
+    display: flex;
+    border: 1px solid #ccc;
+    margin-left: 30px;
+    width: auto;
+    height: 30px;
+    cursor: pointer;
+    align-items: center;
+    background-color: white;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.section-1 .inner-warp .menu-content .product-content .product-btn ul li button.btn-select:hover,
+.section-1 .inner-warp .menu-content .product-content .product-btn ul li button.btn-select.active {
+    color: white;
+    background-color: black;
+}
+
+.section-1 .inner-warp .menu-content .product-content .product-btn ul li button.btn-add {
+    color: green;
+    background-color: white;
+
+}
+
+.section-1 .inner-warp .menu-content .product-content .product-btn ul li button.btn-add:hover {
+    color: white;
+    background-color: green;
+}
+
+
+.section-1 .inner-warp .menu-content .product-content .product-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.product-list{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.product-list table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.product-list th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.product-list td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.product-list td img{
+    width: 120px;
+    height: auto;
+}
+
+.product-list td h3{
+    width: 240px;
+    height: auto;
+}
+
+.product-list td div{
+    display: flex;
+    width: auto;
+    height: auto;
+    justify-content: center;
+}
+
+
+.product-list td button.btnStatus{
+    width: 80px;
+    height: 30px;
+    border: 1px solid #ddd;
+    color: white;
+    cursor: pointer;
+    margin-left: 5px;
+    font-weight: 700;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+
+.product-list td div button{
+    width: 80px;
+    height: 30px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    margin-left: 5px;
+    font-weight: 700;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+.product-list td div button.btn-adjustProduct{
+    background-color: yellow;
+}
+
+.product-list td div button.btn-deleteProduct{
+    background-color: red;
+}
+
+
+
+
+
+
+
+
+.product-pagination{
+    width: 100%;
+}
+
+.product-pagination ul{
+    display: flex;
+    list-style-type: none;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+}
+
+.product-pagination ul button{
+    margin-right: 3px;
+    border-radius: 1px 50%;
+    height: 15px;
+    width: 10px;
+    background-color: white;
+}
+
+.product-pagination ul button.active{
+    background-color: #000;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* styles.css */
+
+/* Style the modal button */
+#openModalBtn {
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  /* Style the modal */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+  }
+  
+  /* Style the modal content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+  }
+  
+  /* Style the close button */
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+  }
+  
+  /* Style form labels */
+  label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  /* Style form input fields */
+  input[type="text"],
+  input[type="file"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  /* Style the image preview */
+  #imagePreview {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+  }
+  
+  /* Style the submit button */
+  button[type="submit"] {
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  /* Style the select dropdown */
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-position: right center;
+    background-repeat: no-repeat;
+    padding-right: 30px;
+  }
+  
+  /* Style select options */
+  select option {
+    background-color: white;
+    color: black;
+  }
+  
+  /* Hover effect for the submit button */
+  button[type="submit"]:hover {
+    background-color: #005c8a;
+  }
+  

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" type="./images/logo.webp" href="./images/icon.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>M2 Duel Store - Cửa hàng trò chơi</title>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="inner-warp">
+                <div class="inner-logo">
+                    <a href="index.html"><img src="./images/logo.webp" alt=""></a>
+                </div>
+
+                <div class="inner-search">
+                    <form action="">
+                        <div class="input-place">
+                            <input type="text" id="searchInput" placeholder="Nội dung cần tìm">
+                            <button type="submit" class="search-button">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </form>
+                    <div class="product-list-search" id="product-list-search">
+                    </div>
+
+                    <div id="productModalSearch" class="modal">
+                        <div id="modal-content-search" class="modal-content">
+                            <!-- Modal content for product-list-search goes here -->
+                        </div>
+                        <span class="close-search">&times;</span>
+                    </div>
+
+
+                </div>
+
+                <div class="inner-menu">
+                    <ul>
+                        <li><i class="fa-regular fa-user"></i></li>
+                    </ul>
+                    <div class="user-menu-false" style="display: none;">
+                        <div class="menu-content">
+                            <div class="menu-title">
+                                <div>ĐĂNG NHẬP TÀI KHOẢN</div>
+                                <p>Nhập email và mật khẩu của bạn:</p>
+                            </div>
+                            <div class="menu-input">
+                                <input type="email" name="mail" id="mailUser" placeholder="Email">
+                                <input type="password" name="password" id="passwordUser" placeholder="Mật khẩu">
+                                <button id="btnLogin">Đăng nhập</button>
+                            </div>
+                            <div class="menu-register" >
+                                <p>Khách hàng mới?</p>
+                                <h5 id="btnRegister"> Tạo tài khoản</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user-menu-true" style="display: none;">
+                        <div class="menu-content">
+                            <div class="menu-input">
+                                <button id="btnCart">Giỏ hàng</button>
+                                <button id="btnLogout">Đăng xuất</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user-menu-register" style="display: none;">
+                        <div class="menu-content">
+                          <div class="menu-title">
+                            <div>ĐĂNG KÝ TÀI KHOẢN</div>
+                            <p>Nhập thông tin của bạn:</p>
+                          </div>
+                          <div class="menu-input">
+                            <input type="email" name="mail" id="mailRegister" placeholder="Email">
+                            <input type="password" name="password" id="passwordRegister" placeholder="Mật khẩu">
+                            <input type="text" name="fullName" id="fullNameRegister" placeholder="Họ và tên">
+                            <input type="text" name="address" id="addressRegister" placeholder="Địa chỉ">
+                            <input type="tel" name="phoneNumber" id="phoneNumberRegister" placeholder="Số điện thoại">
+                            <button id="btnMakeRegister">Đăng ký</button>
+                          </div>
+                        </div>
+                      </div>
+
+                </div>
+
+
+            </div>
+        </div>
+        <div class="contaier-1">
+            <div class="inner-nav">
+                <section>
+
+
+
+
+                </section>
+            </div>
+        </div>
+    </header>
+
+    <!-- <section class="sc-filterProduct">
+        <div class="sc-div-filterProduct">
+            <div class="filter-product-container" id="filter-product-list">
+            </div>
+            <div class="pagination" id="pagination"></div>
+        </div>
+    </section> -->
+
+    <section class="sc-one">
+        <div class="section-one">
+            <div class="banner">
+                <img src="./images/banner.webp" alt="">
+            </div>
+        </div>
+
+        <div class="section-four">
+            <div class="new-product-yughioh">
+                <div class="sc-top">
+                    <h2>YUGHIOH TCG</h2>
+                </div>
+                <div class="sc-bottom">
+                    <div class="sc-banner">
+                        <img src="./images/yugioh-tcg.webp" alt="">
+                    </div>
+                    <div class="product-pagination">
+                        <div class="sc-products-1" id="sc-products-1"></div>
+                        <ul class="paginationNewProduct-1" id="paginationNewProduct-1"></ul>
+                    </div>
+                    
+                </div>
+
+            </div>
+
+            <div class="new-product-yughioh">
+                <div class="sc-top">
+                    <h2>POKEMON TCG</h2>
+                </div>
+                <div class="sc-bottom">
+                    <div class="sc-banner">
+                        <img src="./images/pokemon-tcg.webp" alt="">
+                    </div>
+
+                    <div class="product-pagination">
+                        <div class="sc-products" id="sc-products"></div>
+                        <ul class="paginationNewProduct-2" id="paginationNewProduct-2">
+
+                        </ul>
+                    </div>
+                    <!-- Modal cho sản phẩm Pokemon -->
+                    <div id="productModalPokemon" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <div class="modal-body">
+                                <!-- Nội dung modal sẽ được thay đổi bằng mã JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+
+
+        <div class="section-two">
+            <div class="sc-top">
+                <h2>SẢN PHẨM MỚI</h2>
+                <ul>
+                    <li><button class="btn-select " product-id="yughioh1">YUGIOH </button></li>
+                    <li><button class="btn-select " product-id="pokemon">POKEMON</button></li>
+                    <li><button class="btn-select " product-id="tonghop">Tổng hợp</button></li>
+                    <li><button class="btn-select " product-id="phukien">Phụ kiện</button></li>
+                </ul>
+            </div>
+
+            <div class="sc-bottom">
+                <div class="product-container" id="product-list">
+                    
+                </div>
+                <div class="product-pagination" id="product-pagination">
+                    <ul class="pagination" id="pagination">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div id="productModal" class="modal">
+            <div class="modal-content-container">
+                <span class="close">&times;</span>
+                <div class="modal-content" id="modal-content">
+                    <!-- Thông tin chi tiết sản phẩm sẽ được hiển thị ở đây -->
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </section>
+
+    <section>
+        <div class="section-three">
+
+        </div>
+    </section>
+
+
+
+    
+
+
+
+    <footer class="footer">
+        <div class="ft-top">
+            <h4>ĐĂNG KÝ NHẬN TIN</h4>
+
+            <div class="emailPromo">
+                <form action="">
+                  <input type="email" name="mail" id="emailInput" placeholder="EMAIL">
+                  <button type="button"><i class="fa-solid fa-paper-plane"></i>Đăng Ký</button>
+                </form>
+            </div>
+
+
+            <div class="icon">
+                <button><i class="fa-brands fa-tiktok"></i></button>
+                <button><i class="fa-brands fa-youtube"></i></button>
+                <button><i class="fa-brands fa-instagram"></i></button>
+                <button><i class="fa-brands fa-facebook"></i></button>
+            </div>
+        </div>
+
+        <div class="ft-bottom">
+            <div class="ft-bt-top">
+                <div class="ft-introduce">
+                    <h2>GIỚI THIỆU</h2>
+                    <p>Thành lập vào năm 2012, chúng tôi là cửa hàng chuyên nghiệp về trò chơi thẻ bài và phụ kiện dành
+                        cho thẻ bài</p>
+                    <p><i class="fa-solid fa-location-dot"></i> 186 Nguyễn Văn Khạ, KP3, Thị trấn Củ Chi, Củ Chi, TP.HCM
+                    </p>
+                    <p><i class="fa-solid fa-phone"></i> 0938144068</p>
+                    <p><i class="fa-solid fa-envelope"></i> info@m2duelstore.com</p>
+                    <p>Giấy phép kinh doanh số 0313685295 - Cấp ngày 09/3/2016 tại Sở Kế hoạch và Đầu tư TP.HCM</p>
+                    <a href=""><img src="./images/dathongbao.webp" alt=""></a>
+                </div>
+                <div class="ft-policy">
+                    <h2>CHÍNH SÁCH</h2>
+                    <ul>
+                        <li>Giới thiệu</li>
+                        <li>Chính sách đổi trả</li>
+                        <li>Chính sách bảo mật</li>
+                        <li>Điều khoản dịch vụ</li>
+                        <li>Liên hệ</li>
+                    </ul>
+                </div>
+                <div class="ft-guide">
+                    <h2>HƯỚNG DẪN</h2>
+                    <ul>
+                        <li>Hướng dẫn bọc bài</li>
+                        <li>Hướng dẫn nhận quà tặng</li>
+                        <li>Kiểm tra đơn hàng</li>
+                        <li>Sản phẩm nổi bật</li>
+                        <li>Tất cả sản phẩm</li>
+                    </ul>
+                </div>
+            </div>  
+
+            <div class="ft-bt-bt">
+                <p>© Copyright 2023 By M2 DUEL Store. Điều hành bởi VIETDUC GAME PRODUCTION</p>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <script src="script.js"></script>
+    
+</body>
+
+</html>

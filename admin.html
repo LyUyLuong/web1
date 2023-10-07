@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="./images/logo.webp" href="./images/icon.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>M2 Duel Store - Cửa hàng trò chơi</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="inner-warp">
+                <div class="inner-logo">
+                    <a href="index.html"><img src="./images/logo.webp" alt=""></a>
+                </div>
+
+
+                <div class="inner-menu">
+                    <ul>
+                        <li><i class="fa-regular fa-user"></i></li>
+                    </ul>
+                    <div class="user-menu-false" style="display: none;">
+                        <div class="menu-content">
+                            <div class="menu-title">
+                                <div>ĐĂNG NHẬP TÀI KHOẢN</div>
+                                <p>Nhập email và mật khẩu của bạn:</p>
+                            </div>
+                            <div class="menu-input">
+                                <input type="email" name="mail" id="mailUser" placeholder="Email">
+                                <input type="password" name="password" id="passwordUser" placeholder="Mật khẩu">
+                                <button id="btnLogin">Đăng nhập</button>
+                            </div>
+                            <div class="menu-register">
+                                <p>Khách hàng mới?</p>
+                                <h5 id="btnRegister"> Tạo tài khoản</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user-menu-true" style="display: none;">
+                        <div class="menu-content">
+                            <div class="menu-input">
+                                <button id="btnCart">Giỏ hàng</button>
+                                <button id="btnLogout">Đăng xuất</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user-menu-register" style="display: none;">
+                        <div class="menu-content">
+                            <div class="menu-title">
+                                <div>ĐĂNG KÝ TÀI KHOẢN</div>
+                                <p>Nhập thông tin của bạn:</p>
+                            </div>
+                            <div class="menu-input">
+                                <input type="email" name="mail" id="mailRegister" placeholder="Email">
+                                <input type="password" name="password" id="passwordRegister" placeholder="Mật khẩu">
+                                <input type="text" name="fullName" id="fullNameRegister" placeholder="Họ và tên">
+                                <input type="text" name="address" id="addressRegister" placeholder="Địa chỉ">
+                                <input type="tel" name="phoneNumber" id="phoneNumberRegister"
+                                    placeholder="Số điện thoại">
+                                <button id="btnMakeRegister">Đăng ký</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+        <div class="contaier-1">
+            <div class="inner-nav">
+                <section>
+
+
+
+
+                </section>
+            </div>
+        </div>
+    </header>
+
+
+
+
+    <div class="section-1">
+        <div class="inner-warp">
+            <div class="menu-select">
+                <div class="menu-title">
+                    <h3>Danh Mục</h3>
+                </div>
+                <div class="menu-btn">
+                    <ul>
+                        <li><button class="btn-choice" id="product-menu">Danh sách sản phẩm</button></li>
+                        <li><button class="btn-choice" id="order-menu">Danh sách đơn hàng</button></li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="menu-content">
+
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <form id="addProductForm" enctype="multipart/form-data">
+                            <label for="category">Danh mục:</label>
+                            <select id="category" name="category" required>
+                                <option value="yughioh1">Yughioh 1</option>
+                                <option value="pokemon">Pokemon </option>
+                                <option value="tonghop">Tổng hợp</option>
+                                <option value="phukien">Phụ kiện</option>
+                            </select>
+                            <label for="productID">ID sản phẩm:</label>
+                            <input type="text" id="productID" name="productID" required>
+                            <label for="title">Tên:</label>
+                            <input type="text" id="title" name="title" required>
+                            <label for="image">Hình ảnh:</label>
+                            <input type="file" id="image" name="image" accept="image/*" required>
+                            <label for="desc">Mô tả:</label>
+                            <textarea id="desc" name="desc" required></textarea>
+                            <label for="price">Giá:</label>
+                            <input type="text" id="price" name="price" required>
+                            <label for="sale">Giảm giá:</label>
+                            <input type="text" id="sale" name="sale" required>
+                            <label for="status">Trạng thái:</label>
+                            <select id="status" name="status" required>
+                                <option value="active">Hoạt động</option>
+                                <option value="inactive">Dừng hoạt động</option>
+                            </select>
+                            <button id="btnForm" type="submit"></button>
+                        </form>
+                    </div>
+                </div>
+
+
+
+
+                
+
+
+                <div class="menu-content-title">
+                    <h2></h2>
+                </div>
+                <div class="product-content" id="product-content" style="display: none;">
+                    <div class="product-btn">
+                        <ul>
+                            <li><button class="btn-add">Thêm sản phẩm</button></li>
+                            <li><button class="btn-select" product-id="yughioh1">YUGIOH </button></li>
+                            <li><button class="btn-select" product-id="pokemon">POKEMON</button></li>
+                            <li><button class="btn-select" product-id="tonghop">Tổng hợp</button></li>
+                            <li><button class="btn-select" product-id="phukien"> Phụ kiện</button></li>
+                        </ul>
+                    </div>
+
+                    <div class="product-list" id="product-list">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Hình ảnh</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div class="product-pagination" id="product-pagination">
+                        <ul class="pagination" id="pagination">
+
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="order-content" id="order-content" style="display: none;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="admin.js"></script>
+
+</body>
+
+</html>
