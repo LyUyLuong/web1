@@ -176,14 +176,15 @@ function handleLogin() {
     localStorage.setItem("isLoggedIn", "true");
     localStorage.setItem("users", JSON.stringify(users));
 
-    alert(`Đăng nhập thành công! Chào mừng ${user.name} đến với trang web của chúng tôi.`);
+    alert(`Đăng nhập thành công! Chào mừng ${user.fullName} đến với trang web của chúng tôi.`);
 
     userMenuFalse.style.display = "none";
     userMenuTrue.style.display = "none";
   } else {
     alert("Đăng nhập thất bại. Vui lòng kiểm tra lại email và mật khẩu.");
   }
-
+  document.cookie = "reloadPageProduct=true;";
+  document.cookie = "reloadPageCart=true;";
   location.reload();
 }
 
@@ -196,10 +197,12 @@ function handleLogout() {
   localStorage.setItem("users", JSON.stringify(users));
   localStorage.setItem("isLoggedIn", "false");
 
-  alert(`Đăng xuất thành công! Tạm biệt ${user.username}, hẹn gặp lại.`);
+  alert(`Đăng xuất thành công! Tạm biệt ${user.fullName}, hẹn gặp lại.`);
 
   userMenuFalse.style.display = "none";
   userMenuTrue.style.display = "none";
+  document.cookie = "reloadPageProduct=true;";
+  document.cookie = "reloadPageCart=true;";
   location.reload();
 }
 
@@ -364,6 +367,7 @@ if (user) {
     // Cập nhật tổng số tiền trong phần tử menu-confirm
     menuConfirm.querySelector("p").textContent = `${totalAmount.toLocaleString()}đ`;
     cartHeader.querySelector("p").textContent = `${amount} Sản phẩm`;
+    document.cookie = "reloadPageProduct=true;";
   }
 }
 
@@ -402,6 +406,7 @@ menuConfirm.querySelector("button").addEventListener("click", () => {
 
     // Display a success message and refresh the page
     alert("Đặt hàng thành công!");
+    document.cookie = "reloadPageAdmin=true;";
     document.cookie = "reloadPageProduct=true;";
     location.reload();
   }

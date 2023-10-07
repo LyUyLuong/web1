@@ -231,6 +231,8 @@ btnLogin.addEventListener("click", ()=>{
     // Đăng nhập thất bại
     alert("Đăng nhập thất bại. Vui lòng kiểm tra lại email và mật khẩu.");
   }
+  document.cookie = "reloadPageProduct=true;";
+  document.cookie = "reloadPageCart=true;";
   location.reload();
 });
 
@@ -257,6 +259,8 @@ btnLogout.addEventListener("click", () => {
   userMenuTrue.style.display = "none";
 
   }
+  document.cookie = "reloadPageProduct=true;";
+  document.cookie = "reloadPageCart=true;";
   location.reload();
 });
 
