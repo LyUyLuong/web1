@@ -475,19 +475,17 @@ const orderList = document.getElementById("order-list");
 
 const btnOrderLists = document.querySelectorAll(".order-select");
 
+
+
 btnOrderLists.forEach(function (btnOrderList) {
   btnOrderList.addEventListener("click", () => {
     const orderStatus = btnOrderList.getAttribute("order-status");
 
     orderList.innerHTML = "";
 
-    let hasOrders = false;
-
     users.forEach(function (user) {
       user.orderHistory.reverse().forEach(function (order, index) {
         if (order.status === orderStatus) {
-          hasOrders = true;
-
           const orderItem = document.createElement("div");
           orderItem.classList.add("product");
 
@@ -528,7 +526,7 @@ btnOrderLists.forEach(function (btnOrderList) {
           if (order.status === "Đang xử lý") {
             orderStatusElement.innerHTML = `
               Trạng thái đơn hàng: <b style="color: red;">${order.status}</b>
-              <button class="btn-acceptOrder" data-order-id="${index}">Xác nhận</button>
+              <button class="btn-acceptOrder" data-order-id="${index}" data-user-id="${users.indexOf(user)}">Xác nhận</button>
             `;
           } else {
             orderStatusElement.innerHTML = `
@@ -539,22 +537,16 @@ btnOrderLists.forEach(function (btnOrderList) {
           orderItem.appendChild(orderStatusElement);
           orderList.appendChild(orderItem);
         }
+
       });
     });
-
-    if (!hasOrders) {
-      orderList.innerHTML = `
-        <div class="no-orders">
-          <h3>Không có đơn hàng</h3>
-        </div>
-      `;
-    }
 
     const btnAcceptOrders = document.querySelectorAll(".btn-acceptOrder");
     btnAcceptOrders.forEach(function (btnAcceptOrder) {
       btnAcceptOrder.addEventListener("click", () => {
         const orderId = btnAcceptOrder.getAttribute("data-order-id");
-        user.orderHistory[orderId].status = "Đã xử lý";
+        const userId = btnAcceptOrder.getAttribute("data-user-id");
+        users[userId].orderHistory[orderId].status = "Đã xử lý";
         localStorage.setItem("users", JSON.stringify(users));
         document.cookie = "reloadPageOrder=true;";
         document.cookie = "reloadPageProduct=true;";
@@ -565,6 +557,9 @@ btnOrderLists.forEach(function (btnOrderList) {
     });
   });
 });
+
+
+
 
 
 
