@@ -931,4 +931,14 @@ body {
     font-size: 20px;
 }
 
-  
+  .order-cus-info{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: -20px;
+    margin-top: 10px;
+  }
+
+  .order-cus-info p{
+    margin-left: 10px;
+  }

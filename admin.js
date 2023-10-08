@@ -484,8 +484,25 @@ btnOrderLists.forEach(function (btnOrderList) {
     orderList.innerHTML = "";
 
     users.forEach(function (user) {
+      const orderInfo = document.createElement("div");
+      orderInfo.classList.add("order-info");
+
+      const orderCusInfo = document.createElement("div");
+      orderCusInfo.classList.add("order-cus-info");
+
+
+      orderCusInfo.innerHTML = `
+            <p>Người đặt hàng: <b>${user.fullName}</b></p>
+            <p>Số điện thoại: <b>${user.phoneNumber}</b></p>
+            <p>Địa chỉ: <b>${user.address}</b></p>
+          `;
+      orderInfo.appendChild(orderCusInfo);
+        
       user.orderHistory.reverse().forEach(function (order, index) {
         if (order.status === orderStatus) {
+
+
+
           const orderItem = document.createElement("div");
           orderItem.classList.add("product");
 
@@ -535,7 +552,8 @@ btnOrderLists.forEach(function (btnOrderList) {
           }
 
           orderItem.appendChild(orderStatusElement);
-          orderList.appendChild(orderItem);
+          orderInfo.appendChild(orderItem);
+          orderList.appendChild(orderInfo);
         }
 
       });
