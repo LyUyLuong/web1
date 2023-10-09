@@ -1,0 +1,35 @@
+{
+    "builds": [
+      {
+        "src": "index.html",
+        "use": "@vercel/static-build"
+      },
+      {
+        "src": "cart.html",
+        "use": "@vercel/static-build"
+      },
+      {
+        "src": "admin.html",
+        "use": "@vercel/static-build"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/index.html",
+        "dest": "/index.html"
+      },
+      {
+        "src": "/cart.html",
+        "dest": "/cart.html"
+      },
+      {
+        "src": "/admin.html",
+        "dest": "/admin.html"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/index.html"
+      }
+    ]
+  }
+  
