@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="cart.css">
     <link rel="shortcut icon" type="./images/logo.webp" href="./images/icon.png" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
     <title>M2 Duel Store - Cửa hàng trò chơi</title>
 </head>
 
@@ -21,31 +21,11 @@
                     <a href="index.html"><img src="./images/logo.webp" alt=""></a>
                 </div>
 
-                <div class="inner-search">
-                    <form action="">
-                        <div class="input-place">
-                            <input type="text" id="searchInput" placeholder="Nội dung cần tìm">
-                            <button type="submit" class="search-button">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </button>
-                        </div>
-                    </form>
-                    <div class="product-list-search" id="product-list-search">
-                    </div>
-
-                    <div id="productModalSearch" class="modal">
-                        <div id="modal-content-search" class="modal-content">
-                            <!-- Modal content for product-list-search goes here -->
-                        </div>
-                        <span class="close-search">&times;</span>
-                    </div>
-
-
-                </div>
-
+                
                 <div class="inner-menu">
                     <ul>
-                        <li><i class="fa-regular fa-user"></i></li>
+                        <li><i class="fa-solid fa-gear" id="gear" style="display: none;"><img src="./images/gear.png" alt=""></i></li>
+                        <li><i class="fa-regular fa-user" id="user"><img src="./images/u.png" alt=""> </i></li>
                     </ul>
                     <div class="user-menu-false" style="display: none;">
                         <div class="menu-content">
@@ -169,10 +149,10 @@
 
 
             <div class="icon">
-                <button><i class="fa-brands fa-tiktok"></i></button>
-                <button><i class="fa-brands fa-youtube"></i></button>
-                <button><i class="fa-brands fa-instagram"></i></button>
-                <button><i class="fa-brands fa-facebook"></i></button>
+                <button><img src="./images/tiktok.png" alt=""></i></button>
+                <button><img src="./images/youtube.png" alt=""></i></button>
+                <button><img src="./images/insta.png" alt=""></i></button>
+                <button><img src="./images/fb.png" alt=""></i></button>
             </div>
         </div>
 

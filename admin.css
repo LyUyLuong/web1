@@ -10,7 +10,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 15px;
     /* Độ rộng của thanh cuộn */
 }
 
@@ -86,7 +86,7 @@ body {
 
     /* Tạo hiệu ứng đẹp cho thanh cuộn trên trình duyệt Chrome và Safari */
     &::-webkit-scrollbar {
-        width: 8px;
+        width: 10px;
         /* Đặt chiều rộng của thanh cuộn */
     }
 
@@ -794,9 +794,8 @@ body {
   
   /* Style the image preview */
   #imagePreview {
-    max-width: 100%;
-    height: auto;
-    margin-top: 10px;
+    height: 80px;
+    width: auto;
   }
   
   /* Style the submit button */
@@ -942,3 +941,18 @@ body {
   .order-cus-info p{
     margin-left: 10px;
   }
+
+  #user img{
+    height: 50px;
+    width: auto;
+}
+
+#gear img{
+    height: 50px;
+    width: auto;
+}
+
+#lup img{
+    height: 26px;
+    width: auto;
+}

@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="./images/logo.webp" href="./images/icon.png" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 
     <title>M2 Duel Store - Cửa hàng trò chơi</title>
     <link rel="stylesheet" href="admin.css">
@@ -25,7 +25,8 @@
 
                 <div class="inner-menu">
                     <ul>
-                        <li><i class="fa-regular fa-user"></i></li>
+                        <li><i class="fa-solid fa-gear" id="gear" style="display: none;"><img src="./images/gear.png" alt=""></i></li>
+                        <li><i class="fa-regular fa-user" id="user"><img src="./images/u.png" alt=""> </i></li>
                     </ul>
                     <div class="user-menu-false" style="display: none;">
                         <div class="menu-content">
@@ -106,7 +107,6 @@
 
 
             <div class="menu-content">
-
                 <div id="myModal" class="modal">
                     <div class="modal-content">
                         <span class="close">&times;</span>
@@ -118,12 +118,13 @@
                                 <option value="tonghop">Tổng hợp</option>
                                 <option value="phukien">Phụ kiện</option>
                             </select>
-                            <label for="productID">ID sản phẩm:</label>
-                            <input type="text" id="productID" name="productID" required>
+                            <label for="productID" style="display: none;">ID sản phẩm:</label>
+                            <input type="text" id="productID" name="productID" style="display: none;">
                             <label for="title">Tên:</label>
                             <input type="text" id="title" name="title" required>
                             <label for="image">Hình ảnh:</label>
                             <input type="file" id="image" name="image" accept="image/*" required>
+                            <img id="imagePreview" alt="Image Preview" src="./images/icon.png" />
                             <label for="desc">Mô tả:</label>
                             <textarea id="desc" name="desc" required></textarea>
                             <label for="price">Giá:</label>
@@ -143,7 +144,7 @@
 
 
 
-                
+
 
 
                 <div class="menu-content-title">

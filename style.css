@@ -9,7 +9,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 10px; /* Độ rộng của thanh cuộn */
+    width: 15px; /* Độ rộng của thanh cuộn */
 }
 
 ::-webkit-scrollbar-track {
@@ -81,7 +81,7 @@ body {
 
     /* Tạo hiệu ứng đẹp cho thanh cuộn trên trình duyệt Chrome và Safari */
     &::-webkit-scrollbar {
-        width: 8px;
+        width: 10px;
         /* Đặt chiều rộng của thanh cuộn */
     }
 
@@ -533,7 +533,7 @@ body {
     margin-left: 250px;
     /* Di chuyển bắt đầu từ bên trái 300px */
     border: none;
-    height: 45px;
+    height: auto;
     justify-content: space-between;
     /* Khoảng cách đều giữa các biểu tượng */
     width: auto;
@@ -542,8 +542,21 @@ body {
 /* Điều chỉnh margin cho từng nút (button) trong phần icon */
 .footer .ft-top .icon button {
     width: 40px;
+    color: #202020;
     margin-left: 30px;
-    background-color: white;
+    border: none;
+    background-color: #202020;
+    cursor: pointer;
+    font-size: 20px;
+    /* Đặt margin về 0 để không còn margin mặc định */
+}
+
+.footer .ft-top .icon button img{
+    width: auto;
+    height: 35px;
+    /* margin-left: 30px; */
+    background-color: #202020;
+    margin-bottom: 5px;
     cursor: pointer;
     font-size: 20px;
     /* Đặt margin về 0 để không còn margin mặc định */
@@ -737,6 +750,7 @@ body {
 
 /* Hiển thị nội dung modal ở giữa trang */
 #modal-content-search {
+    height: 500px;
     display: flex;
     background-color: #F5F5F5;
     margin: auto;
@@ -770,10 +784,12 @@ body {
 }
 
 #modal-content-search .content-modal .desc {
-    height: 180px;
+    height: auto;
+    /* margin-bottom: auto; */
 }
 
 #modal-content-search .content-modal .price {
+    margin-top: 5px;
     display: flex;
 }
 
@@ -1070,9 +1086,20 @@ body {
 }
 
 
+#user img{
+    height: 50px;
+    width: auto;
+}
 
+#gear img{
+    height: 50px;
+    width: auto;
+}
 
-
+#lup img{
+    height: 26px;
+    width: auto;
+}
 
 
 
