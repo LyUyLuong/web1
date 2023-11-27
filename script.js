@@ -64,8 +64,8 @@ if (!users) {
   ];
 
   // Lưu danh sách người dùng tĩnh vào localStorage
-  // localStorage.setItem("users", JSON.stringify(users));
-  localStorage.seetItem("users", JSON.stringify(users));
+  localStorage.setItem("users", JSON.stringify(users));
+  // localStorage.seetItem("users", JSON.stringify(users));
 }
 
 
@@ -228,7 +228,7 @@ btnLogin.addEventListener("click", () => {
     return; // Không thực hiện đăng nhập nếu thiếu thông tin
   }
 
-  const user = users.find((user) => user.email === userEmail && user.password === userPassword);
+  const user = users.find((user) => user.email === userEmail && user.password === userPassword); 
 
   if (user) {
     // Đăng nhập thành công

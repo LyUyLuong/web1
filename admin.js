@@ -772,16 +772,16 @@ addProductForm.addEventListener("submit", (e) => {
       modal.style.display = "none";
 
       // Thêm sản phẩm vào mảng products dựa trên danh mục
-      if (products.hasOwnProperty(category)) {
-        console.log(`${title}`);
-        products[category].push(newProduct);
+      // if (products.hasOwnProperty(category)) {
+      //   console.log(`${title}`);
+      //   products[category].push(newProduct);
 
-        // Lưu danh sách sản phẩm mới vào Local Storage
-        const productsJSON = JSON.stringify(products);
-        localStorage.setItem("myProducts", productsJSON);
-      } else {
-        console.error(`Danh mục "${category}" không tồn tại trong mảng sản phẩm.`);
-      }
+      //   // Lưu danh sách sản phẩm mới vào Local Storage
+      //   const productsJSON = JSON.stringify(products);
+      //   localStorage.setItem("myProducts", productsJSON);
+      // } else {
+      //   console.error(`Danh mục "${category}" không tồn tại trong mảng sản phẩm.`);
+      // }
     };
   }
 
