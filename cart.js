@@ -25,40 +25,28 @@ var users = JSON.parse(localStorage.getItem("users"));
 if (!users) {
   users = [
     {
-      username: "user1",
-      email: "user1@example.com",
-      password: "password1",
-      fullName: "Nguyễn Văn A",
-      address: "123 Đường ABC, Quận XYZ, TP HCM",
-      phoneNumber: "0123456789",
+      username: "Lý Uy Lương",
+      email: "lyuyluonglienhe@gmail.com",
+      password: "123456",
+      fullName: "Lý Uy Lương",
+      address: "36/2E ",
+      phoneNumber: "0359133867",
       isLoggedIn: false,
       cart: [],
       orderHistory: [],
-      admin:false
-    },
-    {
-      username: "user2",
-      email: "user2@example.com",
-      password: "password2",
-      fullName: "Trần Thị B",
-      address: "456 Đường DEF, Quận UVW, TP HCM",
-      phoneNumber: "0987654321",
-      isLoggedIn: false,
-      cart: [],
-      orderHistory: [],
-      admin:false
+      admin: false
     },
     {
       username: "admin",
       email: "admin@gmail.com",
       password: "admin123",
-      fullName: "LUL",
-      address: "",
-      phoneNumber: "",
+      fullName: "Lý Uy Lương",
+      address: "1/54",
+      phoneNumber: "0999999999",
       isLoggedIn: false,
       cart: [],
       orderHistory: [],
-      admin:true
+      admin: true
     }
     // Thêm các người dùng khác ở đây
   ];
@@ -304,7 +292,17 @@ btnLogout.addEventListener("click", () => {
 
 
 
+// Lấy tham chiếu đến nút hoặc liên kết mở tab mới
+const openCartInNewTabButton = document.getElementById("btnCart");
 
+// Thêm sự kiện click cho nút hoặc liên kết
+openCartInNewTabButton.addEventListener("click", function () {
+  // URL của trang giỏ hàng
+  const cartPageURL = "cart.html"; // Thay thế bằng URL của trang giỏ hàng thực tế
+
+  // Mở tab mới và chuyển hướng đến trang giỏ hàng
+  window.open(cartPageURL, "_blank");
+});
 
 
 

@@ -48,8 +48,8 @@ body {
 }
 
 .header .inner-warp img {
-    width: 160px;
-    height: auto;
+    width: auto;
+    height: 60px;
     margin-right: 10px;
 }
 
@@ -110,6 +110,11 @@ body {
     justify-content: left;
     align-items: center;
     font-size: 16px;
+}
+
+.product-list-search .product-1:hover{
+    scale: 1.01;
+    box-shadow: 0 0 10px rgba(19, 16, 16, 0.2);
 }
 
 .product-list-search .product-1 img {
@@ -191,6 +196,7 @@ body {
     background-color: white;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
     border: 1px solid aliceblue;
+    transition: 0.5s, color 0.5s, padding 0.5s, border 0.5s;
 }
 
 
@@ -204,6 +210,7 @@ body {
     background-color: white;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
     border: 1px solid aliceblue;
+    transition: 0.5s, color 0.5s, padding 0.5s, border 0.5s;
 }
 
 
@@ -274,6 +281,7 @@ body {
     border: 1px solid aliceblue;
     /* margin-left: auto;
     margin-right: auto; */
+    transition: 0.5s, color 0.5s, padding 0.5s, border 0.5s;
 }
 
 .inner-menu .user-menu-true .menu-content{
@@ -417,8 +425,6 @@ body {
     font-size: 16px;
     font-weight: 600;
     transition: 0.3s, color 0.3s, padding 0.3s, border 0.3s;
-
-
 }
 
 .section-two .sc-top ul button:hover,
@@ -450,6 +456,11 @@ body {
     /* align-items: center; */
     display: flex;
     flex-direction: column;
+}
+
+.section-two .sc-bottom .product-container .product:hover{
+    scale: 1.01;
+    box-shadow: 0 0 10px rgba(19, 16, 16, 0.2);
 }
 
 /* Áp dụng cho tất cả các phần tử img trong .section-two .sc-bottom .product */
@@ -568,7 +579,8 @@ body {
     display: flex;
     flex-direction: row;
     align-items: flex-end;
-    height: 25%;
+    height: 20%;
+    width: auto;
 }
 
 .product-price p {
@@ -1039,6 +1051,13 @@ body {
 .section-four .sc-bottom .sc-products-1 .product{
     width: 50%;
     height: auto;
+    /* scale: 0.95; */
+}
+
+.section-four .sc-bottom .sc-products .product:hover,
+.section-four .sc-bottom .sc-products-1 .product:hover{
+    scale: 1.01;
+    box-shadow: 0 0 10px rgba(19, 16, 16, 0.2);
 }
 
 .section-four .sc-bottom .sc-products .product img,

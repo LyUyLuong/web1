@@ -19,13 +19,15 @@
         <div class="container">
             <div class="inner-warp">
                 <div class="inner-logo">
-                    <a href="index.html"><img src="./images/logo.webp" alt=""></a>
+                    <a href="index.html"><img id="logoPreview1" alt="Logo" src="./images/logo.webp"></a>
                 </div>
 
 
                 <div class="inner-menu">
                     <ul>
-                        <li><i class="fa-solid fa-gear" id="gear" style="display: none;"><img src="./images/gear.png" alt=""></i></li>
+                        <li><i class="fa-solid fa-gear" id="gear" style="display: none;">
+                                <a href="admin.html"><img img src="./images/gear.png" alt=""></a>
+                            </i></li>
                         <li><i class="fa-regular fa-user" id="user"><img src="./images/u.png" alt=""> </i></li>
                     </ul>
                     <div class="user-menu-false" style="display: none;">
@@ -96,11 +98,13 @@
             <div class="menu-select">
                 <div class="menu-title">
                     <h3>Danh Mục</h3>
+
                 </div>
                 <div class="menu-btn">
                     <ul>
                         <li><button class="btn-choice" id="product-menu">Danh sách sản phẩm</button></li>
                         <li><button class="btn-choice" id="order-menu">Danh sách đơn hàng</button></li>
+                        <li><button class="btn-choice" id="index-menu">Trang thông tin</button></li>
                     </ul>
                 </div>
             </div>
@@ -109,7 +113,7 @@
             <div class="menu-content">
                 <div id="myModal" class="modal">
                     <div class="modal-content">
-                        <span class="close">&times;</span>
+                        <!-- <span class="close">&times;</span> -->
                         <form id="addProductForm" enctype="multipart/form-data">
                             <label for="category">Danh mục:</label>
                             <select id="category" name="category" required>
@@ -123,7 +127,7 @@
                             <label for="title">Tên:</label>
                             <input type="text" id="title" name="title" required>
                             <label for="image">Hình ảnh:</label>
-                            <input type="file" id="image" name="image" accept="image/*" >
+                            <input type="file" id="image" name="image" accept="image/*">
                             <img id="imagePreview" alt="Image Preview" src="./images/upload.png" />
                             <label for="desc">Mô tả:</label>
                             <textarea id="desc" name="desc" required></textarea>
@@ -132,10 +136,19 @@
                             <label for="sale">Giảm giá:</label>
                             <input type="text" id="sale" name="sale" required>
                             <label for="status">Trạng thái:</label>
-                            <select id="status" name="status" required>
+                            <div id="status">
+                                <input type="radio" id="active" name="status" value="active" checked>
+                                <label for="active">Hoạt động</label>
+
+                                <input type="radio" id="inactive" name="status" value="inactive">
+                                <label for="inactive">Dừng hoạt động</label>
+                            </div>
+
+                            <!-- <select id="status" name="status" required>
                                 <option value="active">Hoạt động</option>
                                 <option value="inactive">Dừng hoạt động</option>
-                            </select>
+                            </select> -->
+
                             <button id="btnForm" type="submit"></button>
                         </form>
                     </div>
@@ -149,6 +162,19 @@
 
                 <div class="menu-content-title">
                     <h2></h2>
+
+
+                    <!-- <span class="close">&times;</span> -->
+                    <div id="tModal1" class="tModal1">
+                        <span class="close">&times;</span>
+                        <div class="tModal1-content-container">
+
+                            <div class="tModal1-content" id="tModal1-content">
+
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="product-content" id="product-content" style="display: none;">
                     <div class="product-btn">
@@ -202,11 +228,62 @@
 
                         </ul>
                     </div>
+                </div>
+
+
+                <div class="index-content" id="index-content" style="display: none;">
+                    <div id="adjustLogo" class="adjustLogo">
+                        <b>Chỉnh sửa Logo</b>
+                        <img id="logoPreview" alt="Logo" src="./images/logo.webp">
+                        <input type="file" id="logoInput">
+                    </div>
+                    <div id="adjustBanner" class="adjustBanner">
+                        <b>Chỉnh sửa Banner</b>
+                        <img id="bannerPreview" alt="Logo" src="./images/banner.webp">
+                        <input type="file" id="bannerInput">
+                    </div>
+                    <div class="adjustNewProduct">
+
+                        <div id="adjustNewProduct1" class="adjustNewProduct1">
+                            <b>Chỉnh sửa NewProduct 1</b>
+                            <img id="newProduct1Preview" alt="NewProduct 1" src="./images/yugioh-tcg.webp">
+                            <input type="file" id="newProduct1Input">
+                        </div>
+
+                        <div id="adjustNewProduct2" class="adjustNewProduct2">
+                            <b>Chỉnh sửa NewProduct 2</b>
+                            <img id="newProduct2Preview" alt="NewProduct 2" src="./images/pokemon-tcg.webp">
+                            <input type="file" id="newProduct2Input">
+                        </div>
+
+                    </div>
+
+
+
+
+                    <footer id="myFooter">
+                        <div class="ft-bt-bt">
+                            <p id="footerContent">© Copyright 2023 By M2 DUEL Store. Điều hành bởi VIETDUC GAME
+                                PRODUCTION</p>
+                            <button onclick="editFooterContent()">Chỉnh sửa Footer</button>
+                        </div>
+                    </footer>
+
+
+
+
+
 
                 </div>
+
+
             </div>
         </div>
+
     </div>
+    <div class="product-list-search" id="product-list-search">
+    </div>
+
 
 
 
@@ -215,14 +292,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-

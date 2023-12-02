@@ -25,24 +25,12 @@ var users = JSON.parse(localStorage.getItem("users"));
 if (!users) {
   users = [
     {
-      username: "user1",
-      email: "user1@example.com",
-      password: "password1",
-      fullName: "Nguyễn Văn A",
-      address: "123 Đường ABC, Quận XYZ, TP HCM",
-      phoneNumber: "0123456789",
-      isLoggedIn: false,
-      cart: [],
-      orderHistory: [],
-      admin: false
-    },
-    {
-      username: "user2",
-      email: "user2@example.com",
-      password: "password2",
-      fullName: "Trần Thị B",
-      address: "456 Đường DEF, Quận UVW, TP HCM",
-      phoneNumber: "0987654321",
+      username: "Lý Uy Lương",
+      email: "lyuyluonglienhe@gmail.com",
+      password: "123456",
+      fullName: "Lý Uy Lương",
+      address: "36/2E ",
+      phoneNumber: "0359133867",
       isLoggedIn: false,
       cart: [],
       orderHistory: [],
@@ -52,9 +40,9 @@ if (!users) {
       username: "admin",
       email: "admin@gmail.com",
       password: "admin123",
-      fullName: "LUL",
-      address: "",
-      phoneNumber: "",
+      fullName: "Lý Uy Lương",
+      address: "1/54",
+      phoneNumber: "0999999999",
       isLoggedIn: false,
       cart: [],
       orderHistory: [],
@@ -81,7 +69,11 @@ const userMenuRegister = document.querySelector(".user-menu-register");
 const btnAdmin = document.querySelector(".fa-gear");
 
 btnAdmin.addEventListener("click", () => {
-  window.location.href = "admin.html";
+
+
+  const adminPageURL = "admin.html"; // 
+
+  window.open(adminPageURL, "_blank");
 });
 
 
@@ -570,18 +562,25 @@ function displayPage(pageNumber) {
   // Tạo các nút phân trang
   const pageCount = Math.ceil(activeProducts.length / itemsPerPage);
   pagination.innerHTML = "";
-  for (let i = 1; i <= pageCount; i++) {
-    const pageButton = document.createElement("button");
-    pageButton.classList.add("btn-pagination");
-    pageButton.textContent = ""; // Set the button text to the page number
-    if (i === currentPage) {
-      pageButton.classList.add("active"); // Add "active" class to the current page
+  if(pageCount == 1)
+  {
+    
+  }
+  else
+  {
+    for (let i = 1; i <= pageCount; i++) {
+      const pageButton = document.createElement("button");
+      pageButton.classList.add("btn-pagination");
+      pageButton.textContent = ""; // Set the button text to the page number
+      if (i === currentPage) {
+        pageButton.classList.add("active"); // Add "active" class to the current page
+      }
+      pageButton.addEventListener("click", () => {
+        currentPage = i;
+        displayPage(currentPage);
+      });
+      pagination.appendChild(pageButton);
     }
-    pageButton.addEventListener("click", () => {
-      currentPage = i;
-      displayPage(currentPage);
-    });
-    pagination.appendChild(pageButton);
   }
 }
 
@@ -889,6 +888,17 @@ window.addEventListener("click", (event) => {
 });
 
 
+
+// window.addEventListener("click", (event) => {
+//   if (event.target === btnUser) {
+//     console.log("hello")
+//     userMenuFalse.style.display="block";
+//     userMenuTrue.style.display="none";
+//     userMenuRegister.style.display="none";
+//   }
+// });
+
+
 // -------------------------------------------------------------
 
 //--------------------------------------------------------------------------
@@ -1133,6 +1143,65 @@ productListModal.addEventListener("click", (event) => {
         }
       }
     }
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////Đây là logo/////////////////////////////////////////////
+document.addEventListener("DOMContentLoaded", () => {
+  // Kiểm tra xem có logo đã lưu trong localStorage hay không
+  const storedLogo = localStorage.getItem("logo");
+
+  // Nếu có, hiển thị logo trong div logoPreview
+  if (storedLogo) {
+    document.getElementById("logoPreview").src = storedLogo;
+  }
+});
+
+//////////////////Đây là Banner///////////////////////////////////
+document.addEventListener("DOMContentLoaded", () => {
+  // Kiểm tra xem có logo đã lưu trong localStorage hay không
+  const storedBanner = localStorage.getItem("banner");
+
+  // Nếu có, hiển thị logo trong div logoPreview
+  if (storedBanner) {
+    document.getElementById("bannerPreview").src = storedBanner;
+  }
+});
+
+////////////////////Đây là newProduct1 ///////////////////////
+document.addEventListener("DOMContentLoaded", () => {
+  // Kiểm tra xem có logo đã lưu trong localStorage hay không
+  const storedNewProduct1 = localStorage.getItem("newProduct1");
+
+  // Nếu có, hiển thị logo trong div logoPreview
+  if (storedNewProduct1) {
+    document.getElementById("newProduct1Preview").src = storedNewProduct1;
+  }
+});
+
+////////////////////Đây là newProduct2 ///////////////////////
+document.addEventListener("DOMContentLoaded", () => {
+  // Kiểm tra xem có logo đã lưu trong localStorage hay không
+  const storedNewProduct2 = localStorage.getItem("newProduct2");
+
+  // Nếu có, hiển thị logo trong div logoPreview
+  if (storedNewProduct2) {
+    document.getElementById("newProduct2Preview").src = storedNewProduct2;
   }
 });
 

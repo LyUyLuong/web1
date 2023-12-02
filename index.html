@@ -18,9 +18,10 @@
         <div class="container">
             <div class="inner-warp">
                 <div class="inner-logo">
-                    <a href="index.html"><img src="./images/logo.webp" alt=""></a>
+                    <a href="index.html"><img id="logoPreview" alt="Logo" src="./images/logo.webp"></a>
+
                 </div>
-                    
+
                 <div class="inner-search">
                     <form action="">
                         <div class="input-place">
@@ -45,7 +46,9 @@
 
                 <div class="inner-menu">
                     <ul>
-                        <li><i class="fa-solid fa-gear" id="gear" style="display: none;"><img src="./images/gear.png" alt=""></i></li>
+                        <li><i class="fa-solid fa-gear" id="gear" style="display: none;">
+                                <a href="admin.html"><img img src="./images/gear.png" alt=""></a>
+                            </i></li>
                         <li><i class="fa-regular fa-user" id="user"><img src="./images/u.png" alt=""> </i></li>
                     </ul>
                     <div class="user-menu-false" style="display: none;">
@@ -59,7 +62,7 @@
                                 <input type="password" name="password" id="passwordUser" placeholder="Mật khẩu">
                                 <button id="btnLogin">Đăng nhập</button>
                             </div>
-                            <div class="menu-register" >
+                            <div class="menu-register">
                                 <p>Khách hàng mới?</p>
                                 <h5 id="btnRegister"> Tạo tài khoản</h5>
                             </div>
@@ -75,20 +78,21 @@
                     </div>
                     <div class="user-menu-register" style="display: none;">
                         <div class="menu-content">
-                          <div class="menu-title">
-                            <div>ĐĂNG KÝ TÀI KHOẢN</div>
-                            <p>Nhập thông tin của bạn:</p>
-                          </div>
-                          <div class="menu-input">
-                            <input type="email" name="mail" id="mailRegister" placeholder="Email">
-                            <input type="password" name="password" id="passwordRegister" placeholder="Mật khẩu">
-                            <input type="text" name="fullName" id="fullNameRegister" placeholder="Họ và tên">
-                            <input type="text" name="address" id="addressRegister" placeholder="Địa chỉ">
-                            <input type="tel" name="phoneNumber" id="phoneNumberRegister" placeholder="Số điện thoại">
-                            <button id="btnMakeRegister">Đăng ký</button>
-                          </div>
+                            <div class="menu-title">
+                                <div>ĐĂNG KÝ TÀI KHOẢN</div>
+                                <p>Nhập thông tin của bạn:</p>
+                            </div>
+                            <div class="menu-input">
+                                <input type="email" name="mail" id="mailRegister" placeholder="Email">
+                                <input type="password" name="password" id="passwordRegister" placeholder="Mật khẩu">
+                                <input type="text" name="fullName" id="fullNameRegister" placeholder="Họ và tên">
+                                <input type="text" name="address" id="addressRegister" placeholder="Địa chỉ">
+                                <input type="tel" name="phoneNumber" id="phoneNumberRegister"
+                                    placeholder="Số điện thoại">
+                                <button id="btnMakeRegister">Đăng ký</button>
+                            </div>
                         </div>
-                      </div>
+                    </div>
 
                 </div>
 
@@ -111,7 +115,7 @@
     <section class="sc-one">
         <div class="section-one">
             <div class="banner">
-                <img src="./images/banner.webp" alt="">
+                <img id="bannerPreview" alt="Logo" src="./images/banner.webp">
             </div>
         </div>
 
@@ -122,13 +126,13 @@
                 </div>
                 <div class="sc-bottom">
                     <div class="sc-banner">
-                        <img src="./images/yugioh-tcg.webp" alt="">
+                        <img id="newProduct1Preview" alt="NewProduct 1" src="./images/yugioh-tcg.webp">
                     </div>
                     <div class="product-pagination">
                         <div class="sc-products-1" id="sc-products-1"></div>
                         <ul class="paginationNewProduct-1" id="paginationNewProduct-1"></ul>
                     </div>
-                    
+
                 </div>
 
             </div>
@@ -139,7 +143,7 @@
                 </div>
                 <div class="sc-bottom">
                     <div class="sc-banner">
-                        <img src="./images/pokemon-tcg.webp" alt="">
+                        <img id="newProduct2Preview" alt="NewProduct 2" src="./images/pokemon-tcg.webp">
                     </div>
 
                     <div class="product-pagination">
@@ -161,8 +165,8 @@
 
             </div>
         </div>
-        
-        
+
+
 
         <div class="section-two">
             <div class="sc-top">
@@ -177,7 +181,7 @@
 
             <div class="sc-bottom">
                 <div class="product-container" id="product-list">
-                    
+
                 </div>
                 <div class="product-pagination" id="product-pagination">
                     <ul class="pagination" id="pagination">
@@ -210,7 +214,7 @@
 
 
 
-    
+
 
 
 
@@ -220,8 +224,8 @@
 
             <div class="emailPromo">
                 <form action="">
-                  <input type="email" name="mail" id="emailInput" placeholder="EMAIL">
-                  <button type="button"><i class="fa-solid fa-paper-plane"></i>Đăng Ký</button>
+                    <input type="email" name="mail" id="emailInput" placeholder="EMAIL">
+                    <button type="button"><i class="fa-solid fa-paper-plane"></i>Đăng Ký</button>
                 </form>
             </div>
 
@@ -267,10 +271,12 @@
                         <li>Tất cả sản phẩm</li>
                     </ul>
                 </div>
-            </div>  
+            </div>
 
             <div class="ft-bt-bt">
-                <p>© Copyright 2023 By M2 DUEL Store. Điều hành bởi VIETDUC GAME PRODUCTION</p>
+                <p id="footerContent">
+                    © Copyright 2023 By M2 DUEL Store. Điều hành bởi VIETDUC GAME PRODUCTION
+                </p>
             </div>
         </div>
     </footer>
@@ -278,7 +284,7 @@
 
 
     <script src="script.js"></script>
-    
+
 </body>
 
 </html>

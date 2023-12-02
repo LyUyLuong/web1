@@ -8,24 +8,12 @@ var users = JSON.parse(localStorage.getItem("users"));
 if (!users) {
   users = [
     {
-      username: "user1",
-      email: "user1@example.com",
-      password: "password1",
-      fullName: "Nguyễn Văn A",
-      address: "123 Đường ABC, Quận XYZ, TP HCM",
-      phoneNumber: "0123456789",
-      isLoggedIn: false,
-      cart: [],
-      orderHistory: [],
-      admin: false
-    },
-    {
-      username: "user2",
-      email: "user2@example.com",
-      password: "password2",
-      fullName: "Trần Thị B",
-      address: "456 Đường DEF, Quận UVW, TP HCM",
-      phoneNumber: "0987654321",
+      username: "Lý Uy Lương",
+      email: "lyuyluonglienhe@gmail.com",
+      password: "123456",
+      fullName: "Lý Uy Lương",
+      address: "36/2E ",
+      phoneNumber: "0359133867",
       isLoggedIn: false,
       cart: [],
       orderHistory: [],
@@ -35,9 +23,9 @@ if (!users) {
       username: "admin",
       email: "admin@gmail.com",
       password: "admin123",
-      fullName: "LUL",
-      address: "",
-      phoneNumber: "",
+      fullName: "Lý Uy Lương",
+      address: "1/54",
+      phoneNumber: "0999999999",
       isLoggedIn: false,
       cart: [],
       orderHistory: [],
@@ -664,12 +652,14 @@ displayPage();
 const btnProductMenu = document.getElementById("product-menu");
 const productContent = document.getElementById("product-content");
 const orderContent = document.getElementById("order-content");
+const IndexContent = document.getElementById("index-content");
 const menuContentTitle = document.querySelector('.menu-content-title');
 const h2Content = menuContentTitle.querySelector('h2');
 
 btnProductMenu.addEventListener("click", () => {
   productContent.style.display = "block";
   orderContent.style.display = "none";
+  IndexContent.style.display = "none";
   h2Content.innerHTML = "Danh sách sản phẩm";
 
 });
@@ -678,7 +668,17 @@ const btnOrderMenu = document.getElementById("order-menu");
 btnOrderMenu.addEventListener("click", () => {
   productContent.style.display = "none";
   orderContent.style.display = "block";
+  IndexContent.style.display = "none";
   h2Content.innerHTML = "Danh sách đơn hàng";
+});
+
+
+const btnIndexMenu = document.getElementById("index-menu");
+btnIndexMenu.addEventListener("click", () => {
+  productContent.style.display = "none";
+  orderContent.style.display = "none";
+  IndexContent.style.display = "block";
+  h2Content.innerHTML = "Trang thông tin";
 });
 
 
@@ -741,13 +741,33 @@ addProductForm.addEventListener("submit", (e) => {
 
   // Lấy thông tin sản phẩm từ form
   const category = document.getElementById("category").value;
-  const productID = generateID(); // Sửa đây để sử dụng hàm generateID
+  const productID = generateID();
   const title = document.getElementById("title").value;
   const imageFile = document.getElementById("image").files[0];
   const desc = document.getElementById("desc").value;
   const price = document.getElementById("price").value;
   const sale = document.getElementById("sale").value;
-  const status = document.getElementById("status").value;
+
+  // Lấy giá trị của trường status từ radio button
+  const statusRadioButtons = document.getElementsByName("status");
+  let status;
+  for (const radioButton of statusRadioButtons) {
+    if (radioButton.checked) {
+      status = radioButton.value;
+      break;
+    }
+  }
+
+  function isNumber(number) {
+    number = parseInt(number);
+
+    if (isNaN(number)) {
+      alert("Số tiền đang bị nhập sai");
+      return "0";
+    } else {
+      return `${number}`;
+    }
+  }
 
   // Thêm sản phẩm vào mảng products
   const newProduct = {
@@ -755,7 +775,7 @@ addProductForm.addEventListener("submit", (e) => {
     id: productID,
     title: title,
     desc: desc,
-    price: price,
+    price: isNumber(price),
     img: "",
     sale: sale,
     status: status,
@@ -766,33 +786,19 @@ addProductForm.addEventListener("submit", (e) => {
   if (imageFile) {
     reader.onload = (event) => {
       newProduct.img = event.target.result;
-      imagePreview.src = event.target.result; // Sửa dòng này để hiển thị hình ảnh preview
+      imagePreview.src = event.target.result;
 
       // Sau khi thêm sản phẩm, đóng modal và làm các công việc khác
       modal.style.display = "none";
-
-      // Thêm sản phẩm vào mảng products dựa trên danh mục
-      // if (products.hasOwnProperty(category)) {
-      //   console.log(`${title}`);
-      //   products[category].push(newProduct);
-
-      //   // Lưu danh sách sản phẩm mới vào Local Storage
-      //   const productsJSON = JSON.stringify(products);
-      //   localStorage.setItem("myProducts", productsJSON);
-      // } else {
-      //   console.error(`Danh mục "${category}" không tồn tại trong mảng sản phẩm.`);
-      // }
     };
   }
 
   newProduct.img = `${imagePreview.src}`;
-  
 
   modal.style.display = "none";
 
   // Thêm sản phẩm vào mảng products dựa trên danh mục
   if (products.hasOwnProperty(category)) {
-
     products[category].push(newProduct);
 
     // Lưu danh sách sản phẩm mới vào Local Storage
@@ -802,18 +808,10 @@ addProductForm.addEventListener("submit", (e) => {
     console.error(`Danh mục "${category}" không tồn tại trong mảng sản phẩm.`);
   }
 
-  
-
-
   if (btnForm.textContent == "Thêm sản phẩm") {
     alert("Thêm sản phẩm thành công!");
-    document.cookie = "reloadPageProduct=true;";
-    location.reload();
-    if (imageFile) {
-      reader.readAsDataURL(imageFile);
-    }
-
   } else {
+    // Xử lý khi sửa sản phẩm
     for (const category in products) {
       const productsInCategory = products[category];
       const index = productsInCategory.findIndex(item => item.id === p);
@@ -821,23 +819,36 @@ addProductForm.addEventListener("submit", (e) => {
         productsInCategory.splice(index, 1);
       }
     }
-
     alert("Sửa sản phẩm thành công!");
-    document.cookie = "reloadPageProduct=true;";
-    location.reload();
-    if (imageFile) {
-      reader.readAsDataURL(imageFile);
-    }
-    
   }
 
+  // Refresh trang
+  document.cookie = "reloadPageProduct=true;";
+  location.reload();
+
+  // Đọc hình ảnh nếu có
+  if (imageFile) {
+    reader.readAsDataURL(imageFile);
+  }
+
+  // Lưu danh sách sản phẩm vào Local Storage
   localStorage.setItem("myProducts", JSON.stringify(products));
 });
 
 
 
 
+// Lấy tham chiếu đến nút hoặc liên kết mở tab mới
+const openCartInNewTabButton = document.getElementById("btnCart");
 
+// Thêm sự kiện click cho nút hoặc liên kết
+openCartInNewTabButton.addEventListener("click", function () {
+  // URL của trang giỏ hàng
+  const cartPageURL = "cart.html"; // Thay thế bằng URL của trang giỏ hàng thực tế
+
+  // Mở tab mới và chuyển hướng đến trang giỏ hàng
+  window.open(cartPageURL, "_blank");
+});
 
 
 
@@ -990,6 +1001,12 @@ const orderList = document.getElementById("order-list");
 const btnOrderLists = document.querySelectorAll(".order-select");
 
 
+const tModal1 = document.getElementById("tModal1");
+const tModal1Container = document.querySelector(".tModal1-content-container");
+const tModal1Content = document.querySelector(".tModal1-content");
+const closeBtnSearch = document.querySelector(".close");
+
+
 
 btnOrderLists.forEach(function (btnOrderList) {
   btnOrderList.addEventListener("click", () => {
@@ -1050,7 +1067,6 @@ btnOrderLists.forEach(function (btnOrderList) {
 
           orderItem.appendChild(totalPriceElement);
 
-          // Add order status
           const orderStatusElement = document.createElement("div");
           orderStatusElement.classList.add("item-status");
 
@@ -1062,20 +1078,90 @@ btnOrderLists.forEach(function (btnOrderList) {
           } else {
             orderStatusElement.innerHTML = `
               Trạng thái đơn hàng: <b style="color: green;">${order.status}</b>
+              <button class="btn-deacceptOrder" data-order-id="${index}" data-user-id="${users.indexOf(user)}">Xác nhận lại</button>
             `;
           }
 
           orderItem.appendChild(orderStatusElement);
           orderInfo.appendChild(orderItem);
           orderList.appendChild(orderInfo);
-        }
 
+          orderItem.addEventListener("click", (event) => {
+            tModal1Content.innerHTML = "";
+
+
+            const clonedOrderItem = orderItem.cloneNode(true);
+
+            const orderInfo = orderItem.parentElement;
+
+            const orderCusInfo = orderInfo.querySelector(".order-cus-info");
+            const clonedorderCusInfo = orderCusInfo.cloneNode(true);
+
+            const clonedorderInfo = document.createElement("div");
+            clonedorderInfo.classList.add("order-info");
+            clonedorderInfo.appendChild(clonedorderCusInfo);
+            clonedorderInfo.appendChild(clonedOrderItem);
+
+            tModal1Content.appendChild(clonedorderInfo);
+            tModal1Container.appendChild(tModal1Content);
+            tModal1.appendChild(tModal1Container);
+            tModal1.style.display = "block";
+
+
+            const closeBtn = document.querySelector(".close");
+            closeBtn.addEventListener("click", () => {
+              tModal1.style.display = "none";
+              // orderInfo
+            });
+
+
+
+
+            const btnAcceptOrders = document.querySelectorAll(".btn-acceptOrder");
+            btnAcceptOrders.forEach(function (btnAcceptOrder) {
+              btnAcceptOrder.addEventListener("click", () => {
+                event.stopPropagation();
+                tModal1.style.display = "none";
+                const orderId = btnAcceptOrder.getAttribute("data-order-id");
+                const userId = btnAcceptOrder.getAttribute("data-user-id");
+                users[userId].orderHistory[orderId].status = "Đã xử lý";
+                localStorage.setItem("users", JSON.stringify(users));
+                document.cookie = "reloadPageOrder=true;";
+                document.cookie = "reloadPageProduct=true;";
+                document.cookie = "reloadPageCart=true;";
+                alert("Xác nhận đơn hàng thành công!");
+                location.reload();
+              });
+            });
+
+            const btnDeacceptOrders = document.querySelectorAll(".btn-deacceptOrder");
+            btnDeacceptOrders.forEach(function (btnDeacceptOrder) {
+              btnDeacceptOrder.addEventListener("click", () => {
+                event.stopPropagation();
+                tModal1.style.display = "none";
+                const orderId = btnDeacceptOrder.getAttribute("data-order-id");
+                const userId = btnDeacceptOrder.getAttribute("data-user-id");
+                users[userId].orderHistory[orderId].status = "Đang xử lý";
+                localStorage.setItem("users", JSON.stringify(users));
+                document.cookie = "reloadPageOrder=true;";
+                document.cookie = "reloadPageProduct=true;";
+                document.cookie = "reloadPageCart=true;";
+                alert("Hủy xác nhận đơn hàng thành công!");
+                location.reload();
+              });
+            });
+
+
+          })
+        }
       });
     });
 
     const btnAcceptOrders = document.querySelectorAll(".btn-acceptOrder");
     btnAcceptOrders.forEach(function (btnAcceptOrder) {
       btnAcceptOrder.addEventListener("click", () => {
+        event.stopPropagation();
+        tModal1.style.display = "none";
         const orderId = btnAcceptOrder.getAttribute("data-order-id");
         const userId = btnAcceptOrder.getAttribute("data-user-id");
         users[userId].orderHistory[orderId].status = "Đã xử lý";
@@ -1087,17 +1173,40 @@ btnOrderLists.forEach(function (btnOrderList) {
         location.reload();
       });
     });
+
+    const btnDeacceptOrders = document.querySelectorAll(".btn-deacceptOrder");
+    btnDeacceptOrders.forEach(function (btnDeacceptOrder) {
+      btnDeacceptOrder.addEventListener("click", () => {
+        event.stopPropagation();
+        tModal1.style.display = "none";
+        const orderId = btnDeacceptOrder.getAttribute("data-order-id");
+        const userId = btnDeacceptOrder.getAttribute("data-user-id");
+        users[userId].orderHistory[orderId].status = "Đang xử lý";
+        localStorage.setItem("users", JSON.stringify(users));
+        document.cookie = "reloadPageOrder=true;";
+        document.cookie = "reloadPageProduct=true;";
+        document.cookie = "reloadPageCart=true;";
+        alert("Hủy xác nhận đơn hàng thành công!");
+        location.reload();
+      });
+    });
+
   });
 });
 
-// for (const category in products) {
-    //   const productsInCategory = products[category];
-    //   const index = productsInCategory.findIndex(p => p.id === productId);
-    //   if (index !== -1) {
-    //     productsInCategory.splice(index, 1);
 
-    //   }
-    // }
+
+
+window.addEventListener("click", (event) => {
+  if (event.target === tModal1) {
+    tModal1.style.display = "none";
+  }
+});
+
+
+
+
+
 
 
 
@@ -1121,3 +1230,229 @@ function reloadPage() {
     document.cookie = "reloadPageAdmin=false"; // Set the cookie value to false
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////Đây là Logo////////////////////////////
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Kiểm tra xem có logo đã lưu trong localStorage hay không
+  const storedLogo = localStorage.getItem("logo");
+
+  // Nếu có, hiển thị logo trong div logoPreview
+  if (storedLogo) {
+    document.getElementById("logoPreview").src = storedLogo;
+  }
+});
+
+
+// Assume you have an input element with id="logoInput" for uploading the logo
+const logoInput = document.getElementById("logoInput");
+
+logoInput.addEventListener("change", (event) => {
+  const file = event.target.files[0];
+
+  // Kiểm tra xem có file được chọn hay không
+  if (file) {
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      const logoDataURL = e.target.result;
+
+      // Lưu logoDataURL vào localStorage
+      localStorage.setItem("logo", logoDataURL);
+
+      // Hiển thị logo trong div logoPreview
+      document.getElementById("logoPreview").src = logoDataURL;
+    };
+
+    // Đọc file dưới dạng Data URL
+    reader.readAsDataURL(file);
+    document.cookie = "reloadPageProduct=true;";
+    document.cookie = "reloadPageCart=true;";
+    location.reload();
+  }
+});
+
+//////////////////Đây là Banner///////////////////////////////////
+document.addEventListener("DOMContentLoaded", () => {
+  // Kiểm tra xem có logo đã lưu trong localStorage hay không
+  const storedBanner = localStorage.getItem("banner");
+
+  // Nếu có, hiển thị logo trong div logoPreview
+  if (storedBanner) {
+    document.getElementById("bannerPreview").src = storedBanner;
+  }
+});
+
+
+// Assume you have an input element with id="logoInput" for uploading the logo
+const bannerInput = document.getElementById("bannerInput");
+
+bannerInput.addEventListener("change", (event) => {
+  const file = event.target.files[0];
+
+  // Kiểm tra xem có file được chọn hay không
+  if (file) {
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      const bannerDataURL = e.target.result;
+
+      // Lưu logoDataURL vào localStorage
+      localStorage.setItem("banner", bannerDataURL);
+
+      // Hiển thị logo trong div logoPreview
+      document.getElementById("bannerPreview").src = bannerDataURL;
+    };
+
+    // Đọc file dưới dạng Data URL
+    reader.readAsDataURL(file);
+    document.cookie = "reloadPageProduct=true;";
+    document.cookie = "reloadPageCart=true;";
+    location.reload();
+  }
+});
+
+
+
+
+
+
+
+
+////////////////////Đây là newProduct1 ///////////////////////
+document.addEventListener("DOMContentLoaded", () => {
+  // Kiểm tra xem có logo đã lưu trong localStorage hay không
+  const storedNewProduct1 = localStorage.getItem("newProduct1");
+
+  // Nếu có, hiển thị logo trong div logoPreview
+  if (storedNewProduct1) {
+    document.getElementById("newProduct1Preview").src = storedNewProduct1;
+  }
+});
+
+
+// Assume you have an input element with id="logoInput" for uploading the logo
+const newProduct1Input = document.getElementById("newProduct1Input");
+
+newProduct1Input.addEventListener("change", (event) => {
+  const file = event.target.files[0];
+
+  // Kiểm tra xem có file được chọn hay không
+  if (file) {
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      const newProduct1DataURL = e.target.result;
+
+      // Lưu logoDataURL vào localStorage
+      localStorage.setItem("newProduct1", newProduct1DataURL);
+
+      // Hiển thị logo trong div logoPreview
+      document.getElementById("newProduct1Preview").src = newProduct1DataURL;
+    };
+
+    // Đọc file dưới dạng Data URL
+    reader.readAsDataURL(file);
+    document.cookie = "reloadPageProduct=true;";
+    document.cookie = "reloadPageCart=true;";
+    location.reload();
+  }
+});
+
+
+
+
+////////////////////Đây là newProduct2 ///////////////////////
+document.addEventListener("DOMContentLoaded", () => {
+  // Kiểm tra xem có logo đã lưu trong localStorage hay không
+  const storedNewProduct2 = localStorage.getItem("newProduct2");
+
+  // Nếu có, hiển thị logo trong div logoPreview
+  if (storedNewProduct2) {
+    document.getElementById("newProduct2Preview").src = storedNewProduct2;
+  }
+});
+
+
+// Assume you have an input element with id="logoInput" for uploading the logo
+const newProduct2Input = document.getElementById("newProduct2Input");
+
+newProduct2Input.addEventListener("change", (event) => {
+  const file = event.target.files[0];
+
+  // Kiểm tra xem có file được chọn hay không
+  if (file) {
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      const newProduct2DataURL = e.target.result;
+
+      // Lưu logoDataURL vào localStorage
+      localStorage.setItem("newProduct2", newProduct2DataURL);
+
+      // Hiển thị logo trong div logoPreview
+      document.getElementById("newProduct2Preview").src = newProduct2DataURL;
+    };
+
+    // Đọc file dưới dạng Data URL
+    reader.readAsDataURL(file);
+    document.cookie = "reloadPageProduct=true;";
+    document.cookie = "reloadPageCart=true;";
+    location.reload();
+  }
+});
+
+
+
+
+//////////////Đây là Footer//////////////////////
+document.addEventListener("DOMContentLoaded", () => {
+  // Kiểm tra xem có innerHTML của footer đã lưu trong localStorage hay không
+  const storedFooterHTML = localStorage.getItem("footerHTML");
+
+  // Nếu có, gán innerHTML cho div hiển thị và p của footer
+  if (storedFooterHTML) {
+      document.getElementById("footerContent").innerHTML = storedFooterHTML;
+      // document.getElementById("footerDisplay").innerHTML = storedFooterHTML;
+  }
+});
+
+// Chức năng chỉnh sửa nội dung của footer
+function editFooterContent() {
+  const newFooterContent = prompt("Nhập nội dung mới cho footer:", document.getElementById("footerContent").innerHTML);
+  if (newFooterContent !== null) {
+      document.getElementById("footerContent").innerHTML = newFooterContent;
+
+      // Lưu innerHTML mới vào localStorage
+      localStorage.setItem("footerHTML", newFooterContent);
+
+      // Hiển thị innerHTML mới trong div hiển thị
+      // document.getElementById("footerDisplay").innerHTML = newFooterContent;
+      document.cookie = "reloadPageProduct=true;";
+      document.cookie = "reloadPageCart=true;";
+      location.reload();
+  }
+}
+
+//////////////////////Đây là logo/////////////////////////////////////////////
+document.addEventListener("DOMContentLoaded", () => {
+  // Kiểm tra xem có logo đã lưu trong localStorage hay không
+  const storedLogo = localStorage.getItem("logo");
+
+  // Nếu có, hiển thị logo trong div logoPreview
+  if (storedLogo) {
+    document.getElementById("logoPreview1").src = storedLogo;
+    
+  }
+});
