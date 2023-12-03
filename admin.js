@@ -25,7 +25,7 @@ if (!users) {
       password: "admin123",
       fullName: "Lý Uy Lương",
       address: "1/54",
-      phoneNumber: "0999999999",
+      phoneNumber: "**********",
       isLoggedIn: false,
       cart: [],
       orderHistory: [],
@@ -741,12 +741,15 @@ addProductForm.addEventListener("submit", (e) => {
 
   // Lấy thông tin sản phẩm từ form
   const category = document.getElementById("category").value;
-  const productID = generateID();
+  const productID = document.getElementById("productID").value;
+  const productIDGenerate = generateID();
   const title = document.getElementById("title").value;
   const imageFile = document.getElementById("image").files[0];
   const desc = document.getElementById("desc").value;
-  const price = document.getElementById("price").value;
+  const price = document.getElementById("price").value.replace(/,/g, "");
   const sale = document.getElementById("sale").value;
+
+  // console.log(parseInt(price.replace(/./g,"")).toLocaleString());
 
   // Lấy giá trị của trường status từ radio button
   const statusRadioButtons = document.getElementsByName("status");
@@ -770,69 +773,143 @@ addProductForm.addEventListener("submit", (e) => {
   }
 
   // Thêm sản phẩm vào mảng products
-  const newProduct = {
-    deleted: "false",
-    id: productID,
-    title: title,
-    desc: desc,
-    price: isNumber(price),
-    img: "",
-    sale: sale,
-    status: status,
-  };
 
-  // Tạo một đối tượng FileReader để đọc hình ảnh và cập nhật nguồn ảnh
-  const reader = new FileReader();
-  if (imageFile) {
-    reader.onload = (event) => {
-      newProduct.img = event.target.result;
-      imagePreview.src = event.target.result;
 
-      // Sau khi thêm sản phẩm, đóng modal và làm các công việc khác
-      modal.style.display = "none";
+
+  if (productID === "") {
+    const newProduct = {
+      deleted: "false",
+      id: productIDGenerate,
+      title: title,
+      desc: desc,
+      price: isNumber(price),
+      img: "",
+      sale: sale,
+      status: status,
     };
-  }
 
-  newProduct.img = `${imagePreview.src}`;
+    // Tạo một đối tượng FileReader để đọc hình ảnh và cập nhật nguồn ảnh
+    const reader = new FileReader();
+    if (imageFile) {
+      reader.onload = (event) => {
+        newProduct.img = event.target.result;
+        imagePreview.src = event.target.result;
 
-  modal.style.display = "none";
-
-  // Thêm sản phẩm vào mảng products dựa trên danh mục
-  if (products.hasOwnProperty(category)) {
-    products[category].push(newProduct);
-
-    // Lưu danh sách sản phẩm mới vào Local Storage
-    const productsJSON = JSON.stringify(products);
-    localStorage.setItem("myProducts", productsJSON);
-  } else {
-    console.error(`Danh mục "${category}" không tồn tại trong mảng sản phẩm.`);
-  }
-
-  if (btnForm.textContent == "Thêm sản phẩm") {
-    alert("Thêm sản phẩm thành công!");
-  } else {
-    // Xử lý khi sửa sản phẩm
-    for (const category in products) {
-      const productsInCategory = products[category];
-      const index = productsInCategory.findIndex(item => item.id === p);
-      if (index !== -1) {
-        productsInCategory.splice(index, 1);
-      }
+        // Sau khi thêm sản phẩm, đóng modal và làm các công việc khác
+        modal.style.display = "none";
+      };
     }
-    alert("Sửa sản phẩm thành công!");
+
+    newProduct.img = `${imagePreview.src}`;
+
+    modal.style.display = "none";
+
+    // Thêm sản phẩm vào mảng products dựa trên danh mục
+    if (products.hasOwnProperty(category)) {
+      products[category].push(newProduct);
+
+      // Lưu danh sách sản phẩm mới vào Local Storage
+      const productsJSON = JSON.stringify(products);
+      localStorage.setItem("myProducts", productsJSON);
+    } else {
+      console.error(`Danh mục "${category}" không tồn tại trong mảng sản phẩm.`);
+    }
+
+    if (btnForm.textContent == "Thêm sản phẩm") {
+      alert("Thêm sản phẩm thành công!");
+    } else {
+      // Xử lý khi sửa sản phẩm
+      for (const category in products) {
+        const productsInCategory = products[category];
+        const index = productsInCategory.findIndex(item => item.id === p);
+        if (index !== -1) {
+          productsInCategory.splice(index, 1);
+        }
+      }
+      alert("Sửa sản phẩm thành công!");
+    }
+
+    // Refresh trang
+    document.cookie = "reloadPageProduct=true;";
+    location.reload();
+
+    // Đọc hình ảnh nếu có
+    if (imageFile) {
+      reader.readAsDataURL(imageFile);
+    }
+
+    // Lưu danh sách sản phẩm vào Local Storage
+    localStorage.setItem("myProducts", JSON.stringify(products));
+
+  }
+  else {
+    const newProduct = {
+      deleted: "false",
+      id: productID,
+      title: title,
+      desc: desc,
+      price: isNumber(price),
+      img: "",
+      sale: sale,
+      status: status,
+    };
+
+    // Tạo một đối tượng FileReader để đọc hình ảnh và cập nhật nguồn ảnh
+    const reader = new FileReader();
+    if (imageFile) {
+      reader.onload = (event) => {
+        newProduct.img = event.target.result;
+        imagePreview.src = event.target.result;
+
+        // Sau khi thêm sản phẩm, đóng modal và làm các công việc khác
+        modal.style.display = "none";
+      };
+    }
+
+    newProduct.img = `${imagePreview.src}`;
+
+    modal.style.display = "none";
+
+    // Thêm sản phẩm vào mảng products dựa trên danh mục
+    if (products.hasOwnProperty(category)) {
+      products[category].push(newProduct);
+
+      // Lưu danh sách sản phẩm mới vào Local Storage
+      const productsJSON = JSON.stringify(products);
+      localStorage.setItem("myProducts", productsJSON);
+    } else {
+      console.error(`Danh mục "${category}" không tồn tại trong mảng sản phẩm.`);
+    }
+
+    if (btnForm.textContent == "Thêm sản phẩm") {
+      alert("Thêm sản phẩm thành công!");
+    } else {
+      // Xử lý khi sửa sản phẩm
+      for (const category in products) {
+        const productsInCategory = products[category];
+        const index = productsInCategory.findIndex(item => item.id === p);
+        if (index !== -1) {
+          productsInCategory.splice(index, 1);
+        }
+      }
+      alert("Sửa sản phẩm thành công!");
+    }
+
+    // Refresh trang
+    document.cookie = "reloadPageProduct=true;";
+    location.reload();
+
+    // Đọc hình ảnh nếu có
+    if (imageFile) {
+      reader.readAsDataURL(imageFile);
+    }
+
+    // Lưu danh sách sản phẩm vào Local Storage
+    localStorage.setItem("myProducts", JSON.stringify(products));
   }
 
-  // Refresh trang
-  document.cookie = "reloadPageProduct=true;";
-  location.reload();
 
-  // Đọc hình ảnh nếu có
-  if (imageFile) {
-    reader.readAsDataURL(imageFile);
-  }
 
-  // Lưu danh sách sản phẩm vào Local Storage
-  localStorage.setItem("myProducts", JSON.stringify(products));
 });
 
 
@@ -872,6 +949,7 @@ function adjustProduct(product) {
   const imageFile = document.getElementById("image");
   const desc = document.getElementById("desc");
   const price = document.getElementById("price");
+  // console.log(price.value);
   const sale = document.getElementById("sale");
   const status = document.getElementById("status");
 
@@ -886,12 +964,22 @@ function adjustProduct(product) {
     }
   }
 
+
+
+
+  // Tùy thuộc vào trạng thái của sản phẩm, bạn có thể thiết lập giá trị checked trực tiếp trong HTML
+  if (product.status === "active") {
+    status.querySelector("#active").checked = true;
+  } else if (product.status === "inactive") {
+    status.querySelector("#inactive").checked = true;
+  }
+
   productID.value = product.id;
   title.value = product.title;
   desc.value = product.desc;
   price.value = product.price;
   sale.value = product.sale;
-  status.value = product.status;
+  // status.value = product.status;
 
   imagePreview.src = product.img; // Hiển thị hình ảnh của sản phẩm
 
@@ -1423,8 +1511,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Nếu có, gán innerHTML cho div hiển thị và p của footer
   if (storedFooterHTML) {
-      document.getElementById("footerContent").innerHTML = storedFooterHTML;
-      // document.getElementById("footerDisplay").innerHTML = storedFooterHTML;
+    document.getElementById("footerContent").innerHTML = storedFooterHTML;
+    // document.getElementById("footerDisplay").innerHTML = storedFooterHTML;
   }
 });
 
@@ -1432,16 +1520,16 @@ document.addEventListener("DOMContentLoaded", () => {
 function editFooterContent() {
   const newFooterContent = prompt("Nhập nội dung mới cho footer:", document.getElementById("footerContent").innerHTML);
   if (newFooterContent !== null) {
-      document.getElementById("footerContent").innerHTML = newFooterContent;
+    document.getElementById("footerContent").innerHTML = newFooterContent;
 
-      // Lưu innerHTML mới vào localStorage
-      localStorage.setItem("footerHTML", newFooterContent);
+    // Lưu innerHTML mới vào localStorage
+    localStorage.setItem("footerHTML", newFooterContent);
 
-      // Hiển thị innerHTML mới trong div hiển thị
-      // document.getElementById("footerDisplay").innerHTML = newFooterContent;
-      document.cookie = "reloadPageProduct=true;";
-      document.cookie = "reloadPageCart=true;";
-      location.reload();
+    // Hiển thị innerHTML mới trong div hiển thị
+    // document.getElementById("footerDisplay").innerHTML = newFooterContent;
+    document.cookie = "reloadPageProduct=true;";
+    document.cookie = "reloadPageCart=true;";
+    location.reload();
   }
 }
 
@@ -1453,6 +1541,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Nếu có, hiển thị logo trong div logoPreview
   if (storedLogo) {
     document.getElementById("logoPreview1").src = storedLogo;
-    
+
   }
 });

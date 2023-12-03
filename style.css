@@ -9,7 +9,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 15px; /* Độ rộng của thanh cuộn */
+    width: 16px; /* Độ rộng của thanh cuộn */
 }
 
 ::-webkit-scrollbar-track {
@@ -74,7 +74,7 @@ body {
     overflow-y: scroll;
     height: auto;
     background-color: #F5F5F5;
-    scrollbar-width: thin;
+    scrollbar-width: 15px;
     /* Đặt kích thước của thanh cuộn (thin, auto, etc.) */
     scrollbar-color: #888 #ccc;
     /* Đặt màu cho thanh cuộn (màu nền, màu thanh cuộn) */
