@@ -321,7 +321,7 @@ if (user) {
     for (const category in products) {
       for (const product of products[category]) {
         if (product.title.toLowerCase().includes(item.productName.toLowerCase())) {
-          itemCart.push({ product, quantity: item.quantity });
+          itemCart.push({ product, quantity: item.quantity, });
         }
       }
     }
@@ -481,7 +481,8 @@ menuConfirm.querySelector("button").addEventListener("click", () => {
       user: user.username,
       cart: user.cart,
       totalPrice: calculateTotalPrice(user.cart),
-      status: "Đang xử lý"
+      status: "Đang xử lý",
+      date: new Date()
     };
 
     // Add the order to the user's order history

@@ -751,6 +751,8 @@ addProductForm.addEventListener("submit", (e) => {
 
   // console.log(parseInt(price.replace(/./g,"")).toLocaleString());
 
+  console.log(category)
+
   // Lấy giá trị của trường status từ radio button
   const statusRadioButtons = document.getElementsByName("status");
   let status;
@@ -778,7 +780,6 @@ addProductForm.addEventListener("submit", (e) => {
 
   if (productID === "") {
     const newProduct = {
-      deleted: "false",
       id: productIDGenerate,
       title: title,
       desc: desc,
@@ -786,6 +787,7 @@ addProductForm.addEventListener("submit", (e) => {
       img: "",
       sale: sale,
       status: status,
+      deleted: "false",
     };
 
     // Tạo một đối tượng FileReader để đọc hình ảnh và cập nhật nguồn ảnh
@@ -806,6 +808,8 @@ addProductForm.addEventListener("submit", (e) => {
 
     // Thêm sản phẩm vào mảng products dựa trên danh mục
     if (products.hasOwnProperty(category)) {
+      console.log(category);
+      console.log(newProduct);
       products[category].push(newProduct);
 
       // Lưu danh sách sản phẩm mới vào Local Storage
@@ -844,14 +848,14 @@ addProductForm.addEventListener("submit", (e) => {
   }
   else {
     const newProduct = {
-      deleted: "false",
-      id: productID,
+      id: productIDGenerate,
       title: title,
       desc: desc,
       price: isNumber(price),
       img: "",
       sale: sale,
       status: status,
+      deleted: "false",
     };
 
     // Tạo một đối tượng FileReader để đọc hình ảnh và cập nhật nguồn ảnh
@@ -872,6 +876,8 @@ addProductForm.addEventListener("submit", (e) => {
 
     // Thêm sản phẩm vào mảng products dựa trên danh mục
     if (products.hasOwnProperty(category)) {
+      console.log(category);
+      console.log(newProduct);
       products[category].push(newProduct);
 
       // Lưu danh sách sản phẩm mới vào Local Storage
@@ -943,7 +949,7 @@ function generateID() {
 
 function adjustProduct(product) {
   refreshForm();
-  const categoryElement = document.getElementById("category");
+  var category = document.getElementById("category");
   const productID = document.getElementById("productID");
   const titleElement = document.getElementById("title");
   const imageFile = document.getElementById("image");
@@ -954,11 +960,11 @@ function adjustProduct(product) {
   const status = document.getElementById("status");
 
   // console.log(product.title);
-  for (const category in products) {
-    for (const item of products[category]) {
+  for (const categoryID in products) {
+    for (const item of products[categoryID]) {
       if (item.title.toLowerCase() === product.title.toLowerCase()) {
         // console.log(`Thuộc về ${category}`);
-        categoryElement.value = category;
+        category.value = categoryID;
         // console.log(`${categoryElement.value}`)
       }
     }
@@ -1034,14 +1040,14 @@ function refreshForm() {
   const sale = document.getElementById("sale");
   const status = document.getElementById("status");
 
-  category.value = "";
-  productID.value = "";
-  title.value = "";
-  // imageFile.value = "";
-  desc.value = "";
-  price.value = "";
-  sale.value = "";
-  status.value = "";
+  // category.value = "";
+  // productID.value = "";
+  // title.value = "";
+  // // imageFile.value = "";
+  // desc.value = "";
+  // price.value = "";
+  // sale.value = "";
+  // status.value = "";
 }
 
 
@@ -1114,6 +1120,8 @@ btnOrderLists.forEach(function (btnOrderList) {
             <p>Người đặt hàng: <b>${user.fullName}</b></p>
             <p>Số điện thoại: <b>${user.phoneNumber}</b></p>
             <p>Địa chỉ: <b>${user.address}</b></p>
+
+            
           `;
       orderInfo.appendChild(orderCusInfo);
 
@@ -1123,6 +1131,8 @@ btnOrderLists.forEach(function (btnOrderList) {
 
 
           const orderItem = document.createElement("div");
+
+          // console.log(orderDate);
           orderItem.classList.add("product");
 
           const orderProductContainer = document.createElement("div");
@@ -1187,6 +1197,12 @@ btnOrderLists.forEach(function (btnOrderList) {
 
             const clonedorderInfo = document.createElement("div");
             clonedorderInfo.classList.add("order-info");
+
+            const orderDate = document.createElement("div");
+            orderDate.classList.add("order-date");
+            orderDate.innerHTML = `${new Date(order.date).toLocaleString()}`;
+
+            clonedorderInfo.appendChild(orderDate);
             clonedorderInfo.appendChild(clonedorderCusInfo);
             clonedorderInfo.appendChild(clonedOrderItem);
 
