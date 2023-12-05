@@ -562,7 +562,8 @@ function displayPage(pageNumber) {
         btnStatus.style.backgroundColor = 'green';
         const index = allProducts.findIndex(p => p.id === product.id);
         allProducts[index].status = 'active';
-        localStorage.setItem('myProducts', JSON.stringify(products));
+        // localStorage.setItem('myProducts', JSON.stringify(products));
+        localStorage.setItem('myProducts', JSON.stringify(allProducts));
         document.cookie = "reloadPageProduct=true;";
       }
 
@@ -574,7 +575,8 @@ function displayPage(pageNumber) {
       const sl = confirm("Bạn có chắc chắn muốn xóa sản phẩm này?");
       if (sl === true) {
         allProducts[index].deleted = "true";
-        localStorage.setItem('myProducts', JSON.stringify(products));
+        // localStorage.setItem('myProducts', JSON.stringify(products));
+        localStorage.setItem('myProducts', JSON.stringify(allProducts));
         document.cookie = "reloadPageProduct=true;";
         alert("Xóa sản phẩm thành công!");
         location.reload();
@@ -741,8 +743,9 @@ addProductForm.addEventListener("submit", (e) => {
 
   // Lấy thông tin sản phẩm từ form
   const category = document.getElementById("category").value;
-  const productID = document.getElementById("productID").value;
   const productIDGenerate = generateID();
+  const productID = document.getElementById("productID").value.toString();
+
   const title = document.getElementById("title").value;
   const imageFile = document.getElementById("image").files[0];
   const desc = document.getElementById("desc").value;
@@ -780,6 +783,7 @@ addProductForm.addEventListener("submit", (e) => {
 
   if (productID === "") {
     const newProduct = {
+      deleted: "false",
       id: productIDGenerate,
       title: title,
       desc: desc,
@@ -787,8 +791,18 @@ addProductForm.addEventListener("submit", (e) => {
       img: "",
       sale: sale,
       status: status,
-      deleted: "false",
     };
+    
+    // const newProduct = {
+    //   id: productIDGenerate,
+    //   title: title,
+    //   desc: desc,
+    //   price: isNumber(price),
+    //   img: "",
+    //   sale: sale,
+    //   status: status,
+    //   deleted: "false",
+    // };
 
     // Tạo một đối tượng FileReader để đọc hình ảnh và cập nhật nguồn ảnh
     const reader = new FileReader();
@@ -847,8 +861,10 @@ addProductForm.addEventListener("submit", (e) => {
 
   }
   else {
+    const id = document.getElementById("productID").value;
+
     const newProduct = {
-      id: productIDGenerate,
+      id: productID,
       title: title,
       desc: desc,
       price: isNumber(price),
@@ -857,6 +873,7 @@ addProductForm.addEventListener("submit", (e) => {
       status: status,
       deleted: "false",
     };
+
 
     // Tạo một đối tượng FileReader để đọc hình ảnh và cập nhật nguồn ảnh
     const reader = new FileReader();
@@ -879,6 +896,8 @@ addProductForm.addEventListener("submit", (e) => {
       console.log(category);
       console.log(newProduct);
       products[category].push(newProduct);
+      console.log(products[category])
+      console.log(products[category].push(newProduct))
 
       // Lưu danh sách sản phẩm mới vào Local Storage
       const productsJSON = JSON.stringify(products);
@@ -1040,7 +1059,7 @@ function refreshForm() {
   const sale = document.getElementById("sale");
   const status = document.getElementById("status");
 
-  // category.value = "";
+  category.value = "";
   // productID.value = "";
   // title.value = "";
   // // imageFile.value = "";
