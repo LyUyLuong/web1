@@ -599,7 +599,7 @@ function displayPage(pageNumber) {
       p = productId;
 
 
-
+      refreshForm();
       document.cookie = "reloadPageProduct=true;";
       adjustProduct(product);
       btnForm.textContent = "Sửa sản phẩm";
@@ -744,7 +744,7 @@ addProductForm.addEventListener("submit", (e) => {
   // Lấy thông tin sản phẩm từ form
   const category = document.getElementById("category").value;
   const productIDGenerate = generateID();
-  const productID = document.getElementById("productID").value.toString();
+  var productID = document.getElementById("productID").value.toString();
 
   const title = document.getElementById("title").value;
   const imageFile = document.getElementById("image").files[0];
@@ -779,159 +779,87 @@ addProductForm.addEventListener("submit", (e) => {
 
   // Thêm sản phẩm vào mảng products
 
-
-
-  if (productID === "") {
-    const newProduct = {
-      deleted: "false",
-      id: productIDGenerate,
-      title: title,
-      desc: desc,
-      price: isNumber(price),
-      img: "",
-      sale: sale,
-      status: status,
-    };
-    
-    // const newProduct = {
-    //   id: productIDGenerate,
-    //   title: title,
-    //   desc: desc,
-    //   price: isNumber(price),
-    //   img: "",
-    //   sale: sale,
-    //   status: status,
-    //   deleted: "false",
-    // };
-
-    // Tạo một đối tượng FileReader để đọc hình ảnh và cập nhật nguồn ảnh
-    const reader = new FileReader();
-    if (imageFile) {
-      reader.onload = (event) => {
-        newProduct.img = event.target.result;
-        imagePreview.src = event.target.result;
-
-        // Sau khi thêm sản phẩm, đóng modal và làm các công việc khác
-        modal.style.display = "none";
-      };
-    }
-
-    newProduct.img = `${imagePreview.src}`;
-
-    modal.style.display = "none";
-
-    // Thêm sản phẩm vào mảng products dựa trên danh mục
-    if (products.hasOwnProperty(category)) {
-      console.log(category);
-      console.log(newProduct);
-      products[category].push(newProduct);
-
-      // Lưu danh sách sản phẩm mới vào Local Storage
-      const productsJSON = JSON.stringify(products);
-      localStorage.setItem("myProducts", productsJSON);
-    } else {
-      console.error(`Danh mục "${category}" không tồn tại trong mảng sản phẩm.`);
-    }
-
-    if (btnForm.textContent == "Thêm sản phẩm") {
-      alert("Thêm sản phẩm thành công!");
-    } else {
-      // Xử lý khi sửa sản phẩm
-      for (const category in products) {
-        const productsInCategory = products[category];
-        const index = productsInCategory.findIndex(item => item.id === p);
-        if (index !== -1) {
-          productsInCategory.splice(index, 1);
-        }
-      }
-      alert("Sửa sản phẩm thành công!");
-    }
-
-    // Refresh trang
-    document.cookie = "reloadPageProduct=true;";
-    location.reload();
-
-    // Đọc hình ảnh nếu có
-    if (imageFile) {
-      reader.readAsDataURL(imageFile);
-    }
-
-    // Lưu danh sách sản phẩm vào Local Storage
-    localStorage.setItem("myProducts", JSON.stringify(products));
-
+  if(productID === ""){
+    productID = productIDGenerate;
   }
-  else {
-    const id = document.getElementById("productID").value;
 
-    const newProduct = {
-      id: productID,
-      title: title,
-      desc: desc,
-      price: isNumber(price),
-      img: "",
-      sale: sale,
-      status: status,
-      deleted: "false",
+
+  const newProduct = {
+    id: productID,
+    title: title,
+    desc: desc,
+    price: isNumber(price),
+    img: "",
+    sale: sale,
+    status: status,
+    deleted: "false",
+  };
+
+
+  // Tạo một đối tượng FileReader để đọc hình ảnh và cập nhật nguồn ảnh
+  const reader = new FileReader();
+  if (imageFile) {
+    reader.onload = (event) => {
+      newProduct.img = event.target.result;
+      imagePreview.src = event.target.result;
+
+      // Sau khi thêm sản phẩm, đóng modal và làm các công việc khác
+      modal.style.display = "none";
     };
-
-
-    // Tạo một đối tượng FileReader để đọc hình ảnh và cập nhật nguồn ảnh
-    const reader = new FileReader();
-    if (imageFile) {
-      reader.onload = (event) => {
-        newProduct.img = event.target.result;
-        imagePreview.src = event.target.result;
-
-        // Sau khi thêm sản phẩm, đóng modal và làm các công việc khác
-        modal.style.display = "none";
-      };
-    }
-
-    newProduct.img = `${imagePreview.src}`;
-
-    modal.style.display = "none";
-
-    // Thêm sản phẩm vào mảng products dựa trên danh mục
-    if (products.hasOwnProperty(category)) {
-      console.log(category);
-      console.log(newProduct);
-      products[category].push(newProduct);
-      console.log(products[category])
-      console.log(products[category].push(newProduct))
-
-      // Lưu danh sách sản phẩm mới vào Local Storage
-      const productsJSON = JSON.stringify(products);
-      localStorage.setItem("myProducts", productsJSON);
-    } else {
-      console.error(`Danh mục "${category}" không tồn tại trong mảng sản phẩm.`);
-    }
-
-    if (btnForm.textContent == "Thêm sản phẩm") {
-      alert("Thêm sản phẩm thành công!");
-    } else {
-      // Xử lý khi sửa sản phẩm
-      for (const category in products) {
-        const productsInCategory = products[category];
-        const index = productsInCategory.findIndex(item => item.id === p);
-        if (index !== -1) {
-          productsInCategory.splice(index, 1);
-        }
-      }
-      alert("Sửa sản phẩm thành công!");
-    }
-
-    // Refresh trang
-    document.cookie = "reloadPageProduct=true;";
-    location.reload();
-
-    // Đọc hình ảnh nếu có
-    if (imageFile) {
-      reader.readAsDataURL(imageFile);
-    }
-
-    // Lưu danh sách sản phẩm vào Local Storage
-    localStorage.setItem("myProducts", JSON.stringify(products));
   }
+
+  newProduct.img = `${imagePreview.src}`;
+
+  modal.style.display = "none";
+
+  // Thêm sản phẩm vào mảng products dựa trên danh mục
+  if (products.hasOwnProperty(category)) {
+    // console.log(category);
+    // console.log(newProduct);
+    for (const category in products) {
+      const productsInCategory = products[category];
+      const index = productsInCategory.findIndex(item => item.id === p);
+      if (index !== -1) {
+        productsInCategory.splice(index, 1);
+      }
+    }
+    products[category].push(newProduct);
+    // console.log(products[category])
+    // console.log(products[category].push(newProduct))
+
+    // Lưu danh sách sản phẩm mới vào Local Storage
+    const productsJSON = JSON.stringify(products);
+    localStorage.setItem("myProducts", productsJSON);
+  } else {
+    console.error(`Danh mục "${category}" không tồn tại trong mảng sản phẩm.`);
+  }
+
+  if (btnForm.textContent == "Thêm sản phẩm") {
+    alert("Thêm sản phẩm thành công!");
+  } else {
+    // Xử lý khi sửa sản phẩm
+    // for (const category in products) {
+    //   const productsInCategory = products[category];
+    //   const index = productsInCategory.findIndex(item => item.id === p);
+    //   if (index !== -1) {
+    //     productsInCategory.splice(index, 1);
+    //   }
+    // }
+    alert("Sửa sản phẩm thành công!");
+  }
+
+  // Refresh trang
+  document.cookie = "reloadPageProduct=true;";
+  location.reload();
+
+  // Đọc hình ảnh nếu có
+  if (imageFile) {
+    reader.readAsDataURL(imageFile);
+  }
+
+  // Lưu danh sách sản phẩm vào Local Storage
+  localStorage.setItem("myProducts", JSON.stringify(products));
+  
 
 
 
@@ -1060,13 +988,13 @@ function refreshForm() {
   const status = document.getElementById("status");
 
   category.value = "";
-  // productID.value = "";
-  // title.value = "";
-  // // imageFile.value = "";
-  // desc.value = "";
-  // price.value = "";
-  // sale.value = "";
-  // status.value = "";
+  productID.value = "";
+  title.value = "";
+  // imageFile.value = "";
+  desc.value = "";
+  price.value = "";
+  sale.value = "";
+  status.value = "";
 }
 
 
